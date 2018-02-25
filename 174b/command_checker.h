@@ -28,7 +28,7 @@ public:
     }
     string parse_command(string command){//parse the command into different part for furthere processing
         return command;
-    }
+    }//return a list of string
     int getnum(){
         return num;
     }

@@ -14,12 +14,13 @@
 #include<fstream>
 #include <stdio.h>
 #include "origin_reader.h"
+#include "index_reader.h"
 using namespace std;
 
 class writer{
 private:
     int page_size; //use this to determine block size ,i.e number of lines
-    string filename;
+    string filename;//name of the outputfile
     ofstream outputfile;
 public:
     writer(string filename, int page_size){
@@ -30,7 +31,11 @@ public:
     void write(origin_reader* p_origin_reader){
         
     }
+    void write(index_reader* p_index_reader){
+        
+    }
+    //void wrtie(vector)
     
-}
+};
 
 #endif /* writer_hpp */

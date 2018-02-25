@@ -22,6 +22,7 @@ public:
     void sort(origin_reader * p_origin_reader){
         
     }
+    //void sort(vector)
 };
 
 #endif /* sorter_h */

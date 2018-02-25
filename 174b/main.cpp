@@ -59,7 +59,7 @@ int main(void) {
 	    double duration;
 		start = std::clock();
         //check command
-        string parsed_command;
+        string parsed_command;//make it a list
         if(command_check.check(command)){
             parsed_command= command_check.parse_command(command);//more in parse_command
             

@@ -44,6 +44,7 @@ public:
     void merge_each_line(){//needed for same key appearing twice in one doc
         
     }
+    //convert
     
 };
 
