@@ -19,6 +19,7 @@
 using namespace std;
 
 int main(void) {
+    
 	std::string command;
 	std::string quit("quit");
 	std::string build("build_index");
