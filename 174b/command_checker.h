@@ -7,28 +7,71 @@
 //
 #include<string>
 #include<iostream>
+#include<vector>
+#include <sstream>
+
 using namespace std;
 
 #ifndef command_checker_h
 #define command_checker_h
 
+
+std::string quit("quit");
+std::string build("build_index");
+std::string load("load");
+std::string merge("merge");
+std::string insert("insert");
+std::string delete_key("delete");
+std::string count("count");
+std::string search("search");
+std::string printpath("printpath");
+std::string page_i("page");
+std::string range("range");
+
+
+
 class command_checker{
 private:
     int num;
+    
 public:
     command_checker(int num = 0){
         this->num = num;
     }//constructor
+    
     bool check(string command){// to be implemented
         
-        cout<<"given command is"<<command<<endl;
-        cout<<"checking command"<<endl;
-        this->num = 1;
-        return true;
+        
+        string cmd = command.substr(0, command.find(' '));
+        if (cmd.compare("quit") or cmd.compare("build_index") or cmd.compare("load") or cmd.compare("merge")
+            or cmd.compare("insert") or cmd.compare("delete") or cmd.compare("count") or cmd.compare("search")
+            or cmd.compare("printpath") or cmd.compare("range") or cmd.compare("page")){
+            
+            this->num = 1;
+            return true;
+        }
+        else
+            return false;
+        
+        
     }
-    string parse_command(string command){//parse the command into different part for furthere processing
-        return command;
-    }//return a list of string
+    vector<string> parse_command(string command){//parse the command into different part for furthere processing
+        
+        std::vector<string> v;
+        
+        istringstream iss(command);
+        
+        do
+        {
+            string subs;
+            iss >> subs;
+            v.push_back(subs);
+            
+        } while (iss);
+        return v;
+        
+        
+}//return a list of string
     int getnum(){
         return num;
     }
