@@ -60,11 +60,15 @@ int main(void) {
 	    double duration;
 		start = std::clock();
         //check command
-        string parsed_command;//make it a list
+        vector<string> parsed_command;//make it a list
+        
         if(command_check.check(command)){
-            parsed_command= command_check.parse_command(command);//more in parse_command
             
-        }else{
+            parsed_command= command_check.parse_command(command);//more in parse_command
+                        
+
+        }
+        else{
             cout<<"there might be some typo in your command"<<endl;
         }
         

@@ -41,13 +41,14 @@ public:
     
     bool check(string command){// to be implemented
         
-        
         string cmd = command.substr(0, command.find(' '));
-        if (cmd.compare("quit") or cmd.compare("build_index") or cmd.compare("load") or cmd.compare("merge")
-            or cmd.compare("insert") or cmd.compare("delete") or cmd.compare("count") or cmd.compare("search")
-            or cmd.compare("printpath") or cmd.compare("range") or cmd.compare("page")){
+        cout<<"checking"<<endl;
+        if (cmd.compare("load")==0 or cmd.compare("merge")==0
+            or cmd.compare("insert")==0 or cmd.compare("delete")==0 or cmd.compare("count")==0 or cmd.compare("search")==0
+            or cmd.compare("printpath")==0 or cmd.compare("range")==0 or cmd.compare("page")==0){
             
             this->num = 1;
+            cout<<"checked"<<endl;
             return true;
         }
         else
@@ -68,6 +69,7 @@ public:
             v.push_back(subs);
             
         } while (iss);
+        cout<<"finished parse"<<endl;
         return v;
         
         
