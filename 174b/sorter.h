@@ -13,14 +13,14 @@
 #include <stdio.h>
 #include<algorithm>
 #include "origin_reader.h"
-
+using namespace std;
 
 class sorter{
 private:
 public:
     sorter();
-    void sort(origin_reader * p_origin_reader){
-        
+    void sortvec(origin_reader * p_origin_reader){
+        sort(p_origin_reader->int_string_pairs.begin(),p_origin_reader->int_string_pairs.end());
     }
     //void sort(vector)
 };
