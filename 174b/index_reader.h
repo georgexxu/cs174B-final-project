@@ -56,6 +56,7 @@ public:
                 if(count_even_odd ==1){//keyword part
                     if(keyword.compare(line.substr(i,pos-i))!=0){
                         keyword=line.substr(i,pos-i);
+                        cout<<"keyword: "<<keyword<<endl; 
                         string_int_pair s_i_pair(keyword,line_counter);
                         string_int_pairs.push_back(s_i_pair);
                     }

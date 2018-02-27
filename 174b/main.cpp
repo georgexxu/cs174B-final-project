@@ -48,14 +48,6 @@ int main(void) {
     pairs.push_back(string2);
     pairs.push_back(string3);
     
-//    for (std::vector<int>::iterator it = myvector.begin() ; it != myvector.end(); ++it)
-//        std::cout << ' ' << *it;
-//    std::cout << '\n';
-   //end of sample
-
-    
-    
-    
 	while(std::getline(cin,command)){
 	    //timer start
         std::clock_t start;
@@ -67,8 +59,9 @@ int main(void) {
         if(command_check.check(command)){
             
             parsed_command= command_check.parse_command(command);//more in parse_command
-                        
-
+            for (std::vector<string>::iterator it = parsed_command.begin() ; it != parsed_command.end(); ++it)
+                std::cout << ' ' << *it<<"  ";
+            cout<<endl; //testing parse_command
         }
         else{
             cout<<"there might be some typo in your command"<<endl;
