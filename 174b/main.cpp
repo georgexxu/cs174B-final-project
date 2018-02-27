@@ -50,9 +50,11 @@ int main(void) {
 //    for (std::vector<int>::iterator it = myvector.begin() ; it != myvector.end(); ++it)
 //        std::cout << ' ' << *it;
 //    std::cout << '\n';
-    
    //end of sample
 
+    
+    
+    
 	while(std::getline(cin,command)){
 	    //timer start
         std::clock_t start;
