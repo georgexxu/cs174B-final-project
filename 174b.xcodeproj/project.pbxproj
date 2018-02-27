@@ -18,6 +18,7 @@
 		3B1760FB204212E1002B4A9C /* origin_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B1760F9204212E1002B4A9C /* origin_reader.cpp */; };
 		3B1760FE2042138E002B4A9C /* index_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B1760FC2042138E002B4A9C /* index_reader.cpp */; };
 		3B17610120421915002B4A9C /* converter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B1760FF20421915002B4A9C /* converter.cpp */; };
+		3B17610320447E36002B4A9C /* tester.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B17610220447E36002B4A9C /* tester.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,6 +34,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3B0C7DD62044993200280231 /* pairs.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = pairs.txt; sourceTree = "<group>"; };
 		3B1760C3204203CB002B4A9C /* 174b */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = 174b; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B1760DF2042053B002B4A9C /* bptree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bptree.cpp; sourceTree = "<group>"; };
 		3B1760E02042053B002B4A9C /* bptree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bptree.h; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 		3B1760FD2042138E002B4A9C /* index_reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = index_reader.h; sourceTree = "<group>"; };
 		3B1760FF20421915002B4A9C /* converter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = converter.cpp; sourceTree = "<group>"; };
 		3B17610020421915002B4A9C /* converter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = converter.h; sourceTree = "<group>"; };
+		3B17610220447E36002B4A9C /* tester.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tester.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				3B1760F020420741002B4A9C /* test.txt */,
+				3B0C7DD62044993200280231 /* pairs.txt */,
 				3B1760EE204205AE002B4A9C /* main.cpp */,
 				3B1760DF2042053B002B4A9C /* bptree.cpp */,
 				3B1760F32042122A002B4A9C /* writer.cpp */,
@@ -110,6 +114,7 @@
 				3B1760E62042053B002B4A9C /* page.cpp */,
 				3B1760E72042053B002B4A9C /* page.h */,
 				3B1760F12042095F002B4A9C /* command_checker.h */,
+				3B17610220447E36002B4A9C /* tester.cpp */,
 			);
 			path = 174b;
 			sourceTree = "<group>";
@@ -181,6 +186,7 @@
 				3B1760EB2042053B002B4A9C /* database.cpp in Sources */,
 				3B1760F52042122A002B4A9C /* writer.cpp in Sources */,
 				3B1760FB204212E1002B4A9C /* origin_reader.cpp in Sources */,
+				3B17610320447E36002B4A9C /* tester.cpp in Sources */,
 				3B1760E92042053B002B4A9C /* bptree.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
