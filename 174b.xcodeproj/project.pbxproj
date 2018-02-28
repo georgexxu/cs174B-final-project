@@ -35,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		3B0C7DD62044993200280231 /* pairs.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = pairs.txt; sourceTree = "<group>"; };
+		3B0C7DD7204686D100280231 /* origin_index.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = origin_index.txt; sourceTree = "<group>"; };
 		3B1760C3204203CB002B4A9C /* 174b */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = 174b; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B1760DF2042053B002B4A9C /* bptree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bptree.cpp; sourceTree = "<group>"; };
 		3B1760E02042053B002B4A9C /* bptree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bptree.h; sourceTree = "<group>"; };
@@ -96,6 +97,7 @@
 				3B1760EE204205AE002B4A9C /* main.cpp */,
 				3B1760DF2042053B002B4A9C /* bptree.cpp */,
 				3B1760F32042122A002B4A9C /* writer.cpp */,
+				3B0C7DD7204686D100280231 /* origin_index.txt */,
 				3B1760F42042122A002B4A9C /* writer.h */,
 				3B1760E02042053B002B4A9C /* bptree.h */,
 				3B1760E12042053B002B4A9C /* console.cpp */,

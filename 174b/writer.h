@@ -45,7 +45,7 @@ public:
             outputfile<< it->second <<" "<<it->first <<" ";
         }
         
-        
+        outputfile.close();
         
     }
     void write(index_reader* p_index_reader){

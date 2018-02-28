@@ -22,6 +22,7 @@ using namespace std;
 int main(void) {
     //testing origin_reader
 
+
     string filename = "test.txt";
     string space = " ";
     if(space.compare(" ")==0){
@@ -30,32 +31,30 @@ int main(void) {
     cout<<"start class origin read"<<endl;
     origin_reader original_reader(filename);
     
+    cout<<"Before sorting"<<endl<<endl;
     original_reader.print_pairs();
     sorter sorter;
     
     sorter.sortvec( &original_reader );
-    
+    cout<<"After sorting"<<endl<<endl;
     original_reader.print_pairs();
-
-
-    //testing index_reader
-    string filename22 = "pairs.txt";
-    cout<<"start class index_reader"<<endl;
-    index_reader index_reader_o(filename22);
-    index_reader_o.print_pairs();
-
-    
+    original_reader.duplicate_eliminate();
+    cout<<"After duplicate elimination: "<<endl<<endl;
+    original_reader.print_pairs();
     
     //test writer
-    writer writer("originindex.txt",1000);
+    cout<<"start writing origin_index"<<endl;
+    writer writer("origin_index.txt",1000);
     writer.write( &original_reader );
-    
+    cout<<"Finished writing the inverted index file"<<endl<<endl;
     //testing index_reader
     
-     string filename2 = "originindex.txt";
-     cout<<"start class index_reader"<<endl;
-     index_reader index_reader_o2(filename2);
-     index_reader_o2.print_pairs();
+    string filename2 = "origin_index.txt";
+    cout<<"start class index_reader"<<endl;
+    index_reader index_reader_o2(filename2);
+    index_reader_o2.print_pairs();
+    cout<<"index reader tested!"<<endl;
     
+    cout<<"end!!!!"<<endl;
     return 0;
 };
