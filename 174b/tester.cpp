@@ -55,6 +55,13 @@ int main(void) {
     index_reader_o2.print_pairs();
     cout<<"index reader tested!"<<endl;
     
+    //test writer for index_reader
+    cout<<"start writing index"<<endl;
+    class writer writer2("final_index.txt",1000);
+    writer2.write( &index_reader_o2 );
+    cout<<"Finished writing the index file"<<endl<<endl;
+
+    
     cout<<"end!!!!"<<endl;
     return 0;
 };
