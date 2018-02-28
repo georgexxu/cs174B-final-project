@@ -16,6 +16,7 @@
 #include "index_reader.h"
 #include<vector>
 #include"sorter.h"
+#include"writer.h"
 using namespace std;
 
 int main(void) {
@@ -35,14 +36,18 @@ int main(void) {
     sorter.sortvec( &original_reader );
     
     original_reader.print_pairs();
-    //testing index_reader
-    /*
-    string filename2 = "pairs.txt";
-    cout<<"start class index_reader"<<endl;
-    index_reader index_reader_o(filename2);
-    index_reader_o.print_pairs();
-    */
     
-        
+    
+    //test writer
+    writer writer("originindex.txt",1000);
+    writer.write( &original_reader );
+    
+    //testing index_reader
+    
+     string filename2 = "originindex.txt";
+     cout<<"start class index_reader"<<endl;
+     index_reader index_reader_o(filename2);
+     index_reader_o.print_pairs();
+    
     return 0;
 };
