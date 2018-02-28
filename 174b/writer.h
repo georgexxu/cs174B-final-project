@@ -19,7 +19,7 @@ using namespace std;
 
 class writer{
 private:
-    int page_size; //use this to determine block size ,i.e number of lines
+    int page_size; //use this to determine block size ,in bytes
     string filename;//name of the outputfile
     ofstream outputfile;
 public:
@@ -30,9 +30,40 @@ public:
     }
     void write(origin_reader* p_origin_reader){
         
+        outputfile.open(filename);
+        
+        
+        for( std::vector<std::pair <string, string> >::iterator it = p_origin_reader->string_pairs.begin(); it != p_origin_reader->string_pairs.end(); ++it )
+        {
+            long position = outputfile.tellp();
+//              cout<<"position before write"<<position<<endl;
+            if (position % page_size > page_size - 100){
+                outputfile<<"\n";
+//                cout<<"new page"<<endl;
+                outputfile.seekp((position/page_size+1)*page_size);
+            }
+            outputfile<< it->second <<" "<<it->first <<" ";
+        }
+        
+        outputfile.close();
+        
     }
     void write(index_reader* p_index_reader){
         
+        outputfile.open(filename);
+        for( std::vector<std::pair <string, int> >::iterator it = p_index_reader->string_int_pairs.begin(); it != p_index_reader->string_int_pairs.end(); ++it )
+        {
+            long position = outputfile.tellp();
+            //              cout<<"position before write"<<position<<endl;
+            if (position % page_size > page_size - 100){
+                outputfile<<"\n";
+                //                cout<<"new page"<<endl;
+                outputfile.seekp((position/page_size+1)*page_size);
+            }
+            outputfile<< it->first <<" "<<it->second <<" ";
+        }
+        
+        outputfile.close();
     }
     //void wrtie(vector)
     

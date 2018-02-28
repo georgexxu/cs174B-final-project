@@ -29,7 +29,7 @@ private:
     string filename;
     ifstream myfile;
     std::vector<std::pair <string, string> > string_pairs;
-   // std::vector<std::pair <int, string> >int_string_pairs;
+    //std::vector<std::pair <int, string> >int_string_pairs;
     //converter converter; //think about this later
 
 public:
@@ -57,7 +57,7 @@ public:
             if(line_counter>100000){
                 return;
             }
-            cout<<"inside origin reader, reading my file"<<endl;
+            //cout<<"inside origin reader, reading my file"<<endl;
             string doc_name = "";
             string line = "";
             std::getline(myfile,line); // get the line
@@ -66,14 +66,14 @@ public:
             string item;
             auto i = 0;
             auto pos = line.find(delim);
-            cout<<"  pos: "<<pos<<endl;
+            //cout<<"  pos: "<<pos<<endl;
             while(pos!=string::npos){
                 if(i==0) {
                     doc_name = line.substr(i,pos-i);
-                    cout<<"doc name: "<<doc_name<<endl;
+                    //cout<<"doc name: "<<doc_name<<endl;
                 }else{
                     item = line.substr(i,pos-i);
-                    if(item.length()!=1){//if it is not a single character
+                    if(item.length()!=1 and item.length()!=0){//if it is not a single character
                         stringPair s_pair(doc_name,item);
                         string_pairs.push_back(s_pair);
                     }
@@ -95,17 +95,23 @@ public:
         myfile.close();
         
     }//line by line read
-    void duplicate_eliminate();//needed for same key appearing twice in a line, this can be done easily later when things are sorted
+    void duplicate_eliminate(){
+        std::unique(string_pairs.begin(),string_pairs.end());
+    }//needed for same key appearing twice in a line, this can be done easily later when things are sorted
     //convert
 
     void print_pairs(){
-        std::vector<pair<string,string> >::iterator it = string_pairs.end();
-        it--;
-        cout<<"<"<<it->first<<","<<it->second<<"> ";
-//        for (std::vector<pair<string,string> >::iterator it=string_pairs.begin();it != string_pairs.end();++it) {
-//            cout<<"<"<<it->first<<","<<it->second<<"> ";
-//        }
+
+//        std::vector<pair<string,string> >::iterator it = string_pairs.end();
+//        it--;
+//        cout<<"<"<<it->first<<","<<it->second<<"> ";
+
+        for (std::vector<pair<string,string> >::iterator it=string_pairs.begin();it != string_pairs.end();++it) {
+            cout<<"<"<<it->first<<","<<it->second<<"> ";
+        }
+        cout<<endl;
     }
+    
 };
 
 
