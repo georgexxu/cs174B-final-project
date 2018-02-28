@@ -15,6 +15,8 @@
 #include "command_checker.h"
 #include "index_reader.h"
 #include<vector>
+#include"sorter.h"
+#include"writer.h"
 using namespace std;
 
 int main(void) {
@@ -27,16 +29,33 @@ int main(void) {
     }
     cout<<"start class origin read"<<endl;
     origin_reader original_reader(filename);
+    
+    original_reader.print_pairs();
+    sorter sorter;
+    
+    sorter.sortvec( &original_reader );
+    
     original_reader.print_pairs();
 
+
     //testing index_reader
-    string filename2 = "pairs.txt";
+    string filename22 = "pairs.txt";
     cout<<"start class index_reader"<<endl;
-    index_reader index_reader_o(filename2);
+    index_reader index_reader_o(filename22);
     index_reader_o.print_pairs();
+
     
     
+    //test writer
+    writer writer("originindex.txt",1000);
+    writer.write( &original_reader );
     
+    //testing index_reader
+    
+     string filename2 = "originindex.txt";
+     cout<<"start class index_reader"<<endl;
+     index_reader index_reader_o2(filename2);
+     index_reader_o2.print_pairs();
     
     return 0;
 };

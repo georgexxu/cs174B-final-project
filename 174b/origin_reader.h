@@ -99,9 +99,11 @@ public:
     //convert
 
     void print_pairs(){
-//        std::vector<pair<string,string> >::iterator it = string_pairs.end();
-//        it--;
-//        cout<<"<"<<it->first<<","<<it->second<<"> ";
+
+        std::vector<pair<string,string> >::iterator it = string_pairs.end();
+        it--;
+        cout<<"<"<<it->first<<","<<it->second<<"> ";
+
         for (std::vector<pair<string,string> >::iterator it=string_pairs.begin();it != string_pairs.end();++it) {
             cout<<"<"<<it->first<<","<<it->second<<"> ";
         }
