@@ -22,6 +22,13 @@ using namespace std;
 int main(void) {
     //testing origin_reader
 
+    string a("zz");
+    string b("abcdefg");
+    if(a>b){
+        cout<<"zz is greater than adbcdefg"<<endl;
+    }else{
+        cout<<"zz is equal or smaller than"<<endl;
+    }
 
     string filename = "test.txt";
     string space = " ";
