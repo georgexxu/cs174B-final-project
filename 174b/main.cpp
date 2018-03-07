@@ -74,6 +74,7 @@ int main(void) {
 			break;
 		}else if(command.compare(build)==0){
 			cout<<"starting to build the index file"<<endl;
+            //put reader and writer in console, call console.build(....).
 			duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
 			cout<<"duration is "<<duration<<endl;
 		}else if(command.compare(load)==0){
