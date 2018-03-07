@@ -22,6 +22,7 @@ typedef pair<int,int> int_int_pair;
 typedef pair<string,int> string_int_pair;
 class index_reader{//after sorting, get the <key,block number> pair and write to an index file
     friend class writer;
+    friend class database;
 private:
     //int page_size; this is determinded previously
     string filename;//sorted <int,string> pairs

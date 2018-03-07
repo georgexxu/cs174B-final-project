@@ -14,6 +14,7 @@
 #include "origin_reader.h"
 #include "command_checker.h"
 #include "index_reader.h"
+#include "database.h"
 #include<vector>
 #include"sorter.h"
 #include"writer.h"
@@ -22,6 +23,13 @@ using namespace std;
 int main(void) {
     //testing origin_reader
 
+    string a("zz");
+    string b("abcdefg");
+    if(a>b){
+        cout<<"zz is greater than adbcdefg"<<endl;
+    }else{
+        cout<<"zz is equal or smaller than"<<endl;
+    }
 
     string filename = "test.txt";
     string space = " ";
@@ -61,6 +69,16 @@ int main(void) {
     writer2.write( &index_reader_o2 );
     cout<<"Finished writing the index file"<<endl<<endl;
 
+    //testing the tree
+    cout<<"test the tree start here"<<endl;
+    database dbs;
+    dbs.test_load(&index_reader_o2);
+    char key[16] ={"feng"};
+    cout<<"search the keyword feng"<<endl;
+    dbs.search(key);
+    char key2[16] = {"yuting"};
+    cout<<"range search between feng and yuting"<<endl;
+    dbs.range_search(key,key2);
     
     cout<<"end!!!!"<<endl;
     return 0;
