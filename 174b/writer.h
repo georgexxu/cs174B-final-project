@@ -28,6 +28,11 @@ public:
         this->filename = filename;
         //initialize the fstream
     }
+    
+    int get_page_size(){
+        return page_size;
+    }
+    
     void write(origin_reader* p_origin_reader){
         
         outputfile.open(filename);
@@ -66,6 +71,8 @@ public:
         outputfile.close();
     }
     //void wrtie(vector)
+    
+    
     
 };
 

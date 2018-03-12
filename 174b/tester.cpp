@@ -73,12 +73,15 @@ int main(void) {
     cout<<"test the tree start here"<<endl;
     database dbs;
     dbs.test_load(&index_reader_o2);
-    char key[16] ={"feng"};
+    char key[16] ={"so"};
     cout<<"search the keyword feng"<<endl;
     dbs.search(key);
-    char key2[16] = {"yuting"};
+    char key2[16] = {"spend"};
     cout<<"range search between feng and yuting"<<endl;
     dbs.range_search(key,key2);
+    
+    //test delete_tree
+    dbs.delete_key_doc("absolute", "4", &writer2);
     
     cout<<"end!!!!"<<endl;
     return 0;
