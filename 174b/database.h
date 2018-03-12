@@ -74,22 +74,22 @@ public:
         ifstream myfile;
         ofstream outputfile;
         string line;
-        //seek for the insert page from tree
-        int page_pos = 1; //set as 1 first
-        
-        myfile.open("final_index.txt");
-        outputfile.open("new_final_inde.txt");
+        int page_pos = -1; //set as 1 first
+
+        myfile.open("origin_index.txt");
+        outputfile.open("new_origin_index.txt");
         
         if(!myfile){
             cout<<"Cannot open input file"<<endl;
         }
         
-        myfile.seekg( page_pos * p_writer->get_page_size());
-        while (getline(myfile, line)) {
-            if (line.find(key) != string::npos) {
-                cout << line << endl;
-            }
+        //seek for the insert page
+        while (myfile >> line)
+        {
+            cout << line << endl;
+            myfile.ignore(1000, '\n');
         }
+        
         
         myfile.close();
         outputfile.close();
@@ -123,39 +123,53 @@ public:
             
             myfile.seekg( (page_pos-1) * p_writer->get_page_size() );
             cout<<"set to"<<page_pos * p_writer->get_page_size()<<endl;///////
-            
+            bool foundkey=0;
             while (myfile >> word2){
-                cout<<"scan through "<<word2<<" /";
+                cout<<"scan through "<<word2<<" ";
+                if (foundkey and (word2=="DOC"+doc)){
+//                    b_exact_pos = myfile.tellg();
+                    break;;
+                }
+                else{
+                    foundkey=0;
+                }
+                    
                 if (key == word2){
                     b_exact_pos = myfile.tellg();
-                    break;
+                    foundkey=1;
+                    cout<<"found "<<word2<<endl;
+                    continue;
                 }
                 word1 = word2;
                 f_exact_pos = myfile.tellg();
+                
             }
             cout<<"front word "<<word1<<" pos at"<<f_exact_pos<<endl;////
-            cout<<"find the word at"<<b_exact_pos<<endl;////
+            cout<<"find the word "<<word2<<"at"<<b_exact_pos<<endl;////
             myfile >> word2;b_exact_pos = myfile.tellg();
+            
             
             // start to write the new file
             cout<<"start update the origin_index"<<endl;/////
             long c_pos=-1;
             myfile.seekg(0);
-            
+            //copy the previous lines
             for(int i=0; i<page_pos-1; i++){
                 getline(myfile,line);
                 c_pos = myfile.tellg();
                 outputfile<<line;
                 outputfile<<"\n";
             }
-            
+            //copy the content in this line before the key
             while(c_pos < f_exact_pos){
                 myfile>>line;
                 c_pos = myfile.tellg();
                 outputfile<<line<<" ";
             }
             
-            myfile.seekg(b_exact_pos);
+            myfile.ignore(50,' ');
+            myfile.ignore(50,' ');
+            myfile.ignore(50,' ');
             
             bool odd = 0;
             while(myfile>>line)
@@ -171,8 +185,7 @@ public:
                 odd = !odd;
             }
             
-            
-            
+
             myfile.close();
             outputfile.close();
             cout<<"finish writing new origin index"<<endl;/////

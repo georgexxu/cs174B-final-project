@@ -81,7 +81,8 @@ int main(void) {
     dbs.range_search(key,key2);
     
     //test delete_tree
-    dbs.delete_key_doc("absolute", "4", &writer2);
+    dbs.delete_key_doc("about", "120", &writer2);
+    
     
     cout<<"end!!!!"<<endl;
     return 0;
