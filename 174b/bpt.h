@@ -91,7 +91,7 @@ public:
     };
     void init_from_empty();
 #ifndef UNIT_TEST
-private:
+public:
 #else
 public:
 #endif

@@ -18,6 +18,7 @@
 using namespace std;
 
 class writer{
+    friend class database;
 private:
     int page_size; //use this to determine block size ,in bytes
     string filename;//name of the outputfile
@@ -28,12 +29,9 @@ public:
         this->filename = filename;
         //initialize the fstream
     }
-    
-    int get_page_size(){
-        return page_size;
-    }
-    
+
     void write(origin_reader* p_origin_reader){
+        
         
         outputfile.open(filename);
         
@@ -41,11 +39,12 @@ public:
         for( std::vector<std::pair <string, string> >::iterator it = p_origin_reader->string_pairs.begin(); it != p_origin_reader->string_pairs.end(); ++it )
         {
             long position = outputfile.tellp();
-//              cout<<"position before write"<<position<<endl;
+            //              cout<<"position before write"<<position<<endl;
             if (position % page_size > page_size - 100){
+                //outputfile<<"\n";
+                //                cout<<"new page"<<endl;
+                outputfile.seekp((position/page_size+1)*page_size-1);
                 outputfile<<"\n";
-//                cout<<"new page"<<endl;
-                outputfile.seekp((position/page_size+1)*page_size);
             }
             outputfile<< it->second <<" "<<it->first <<" ";
         }
@@ -61,22 +60,23 @@ public:
             long position = outputfile.tellp();
             //              cout<<"position before write"<<position<<endl;
             if (position % page_size > page_size - 100){
-                outputfile<<"\n";
+                //outputfile<<"\n";
                 //                cout<<"new page"<<endl;
+                outputfile<<"\n";
                 outputfile.seekp((position/page_size+1)*page_size);
+                
             }
             outputfile<< it->first <<" "<<it->second <<" ";
         }
         
         outputfile.close();
     }
-    //void wrtie(vector)
     
     void write_from_index1(string f_name){
         //read it byte by byte, check number, assuming that writing separate pages by \n
         ifstream myfile;
         myfile.open(f_name);
-        
+
         outputfile.open("final_index.txt");
         if(!myfile){
             cout<<"Cannot open input file"<<endl;
@@ -88,8 +88,8 @@ public:
             char delim = ' ';
             int count_even_odd = 1; //1 is odd
             std::getline(myfile,line); // get the line
-            long i = 0;
-            long pos = line.find(delim);
+            auto i = 0;
+            auto pos = line.find(delim);
             //cout<<"  pos: "<<pos<<endl;
             while(pos!=string::npos){
                 if(count_even_odd ==1){//keyword part
@@ -100,17 +100,16 @@ public:
                             long position = outputfile.tellp();
                             //              cout<<"position before write"<<position<<endl;
                             if (position % page_size > page_size - 100){
-                                //                                outputfile.seekp((position/page_size+1)*page_size-1);
-                                //                                outputfile<<"\n";
+
+//                                outputfile.seekp((position/page_size+1)*page_size-1);
+//                                outputfile<<"\n";
                                 for(int i =0;i<(page_size-(position % page_size)-1);i++){
-                                    outputfile<<" ";
-                                    if(i == (page_size-(position % page_size))-2)
+                                        outputfile<<" ";
+                                        if(i == (page_size-(position % page_size))-2)
                                         outputfile<<"\n";
                                 }
                             }
                             outputfile<<keyword<<" "<<line_counter<<" ";
-                            //                            string_int_pair s_i_pair(keyword,line_counter);
-                            //                            string_int_pairs.push_back(s_i_pair);
                         }
                     }
                     i = ++pos;//keep reading the line
@@ -127,7 +126,6 @@ public:
         myfile.close();
         outputfile.close();
     }
-
     
 };
 

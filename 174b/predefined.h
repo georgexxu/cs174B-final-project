@@ -27,10 +27,8 @@ struct key_t {
 };
 
 inline int keycmp(const key_t &a, const key_t &b) {
-    
-    
-//    int x = strlen(a.k) - strlen(b.k);
-//    return x == 0 ? strcmp(a.k, b.k) : x;
+    //int x = strlen(a.k) - strlen(b.k);
+    //return x == 0 ? strcmp(a.k, b.k) : x;
     return strcmp(a.k, b.k);
 }
 

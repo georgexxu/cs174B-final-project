@@ -20,7 +20,7 @@ private:
     database dbs;
 
 public:
-    console(int page):dbs(){
+    console(int page,int page_num):dbs(){
         num_of_pages = page;
     }
     
