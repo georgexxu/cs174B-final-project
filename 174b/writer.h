@@ -24,6 +24,10 @@ private:
     string filename;//name of the outputfile
     ofstream outputfile;
 public:
+    int get_page_size(){
+        return page_size;
+    }
+    
     writer(string filename, int page_size){
         this->page_size = page_size;
         this->filename = filename;
