@@ -79,7 +79,8 @@ int main(void) {
 			cout<<"duration is "<<duration<<endl;
 		}else if(command.compare(load)==0){
 			cout<<console1.getpage();
-			console1.load();
+            string filename("final_index.txt"); //to be replaced by parsed string 
+			console1.load(filename);
 			cout<<"loading"<<endl;
 			duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
 			cout<<"duration is "<<duration<<endl;
