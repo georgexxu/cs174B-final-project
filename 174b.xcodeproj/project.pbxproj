@@ -56,7 +56,6 @@
 		3B323D6C2057526B00DAB5BE /* final_index.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = final_index.txt; sourceTree = "<group>"; };
 		3B323D6D2057526B00DAB5BE /* origin_index.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = origin_index.txt; sourceTree = "<group>"; };
 		3B323D6E2057551A00DAB5BE /* sec_file.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sec_file.txt; sourceTree = "<group>"; };
-		3B323D6F2057556900DAB5BE /* temperary_name.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = temperary_name.txt; sourceTree = "<group>"; };
 		3B323D7020577DD000DAB5BE /* final_index2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = final_index2.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,7 +111,6 @@
 				3B1760FF20421915002B4A9C /* converter.cpp */,
 				3B17610020421915002B4A9C /* converter.h */,
 				3B1760E52042053B002B4A9C /* Makefile */,
-				3B323D6F2057556900DAB5BE /* temperary_name.txt */,
 				3B1760E62042053B002B4A9C /* page.cpp */,
 				3B1760E72042053B002B4A9C /* page.h */,
 				3B1760F12042095F002B4A9C /* command_checker.h */,
