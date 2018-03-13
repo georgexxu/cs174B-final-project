@@ -21,6 +21,8 @@
 using namespace std;
 
 int main(void) {
+    
+    
     //testing origin_reader
 
     string a("zz");
@@ -69,19 +71,34 @@ int main(void) {
     writer2.write( &index_reader_o2 );
     cout<<"Finished writing the index file"<<endl<<endl;
 
+    
+    writer2.write_from_index1("origin_index.txt");
     //testing the tree
     cout<<"test the tree start here"<<endl;
     database dbs;
-    dbs.test_load(&index_reader_o2);
+    
+    dbs.load("final_index.txt");
     char key[16] ={"so"};
-    cout<<"search the keyword feng"<<endl;
+    
+    cout<<"search the keyword so"<<endl;
     dbs.search(key);
     char key2[16] = {"spend"};
-    cout<<"range search between feng and yuting"<<endl;
+    cout<<"range search between so and spend"<<endl;
     dbs.range_search(key,key2);
     
-    //test delete_tree
+    //test delete
     dbs.delete_key_doc("about", "120", &writer2);
+    
+    
+    
+    //update index2 after delete
+    writer2.write_from_index1("origin_index.txt");
+    //load again
+    dbs.load("final_index.txt");
+    
+    
+    //test insert
+    dbs.insert_key_doc("allocate", "DOC11", &writer2);
     
     
     cout<<"end!!!!"<<endl;

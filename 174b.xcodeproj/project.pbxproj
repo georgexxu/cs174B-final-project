@@ -31,6 +31,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3859913F205773E80065D7AA /* final_index.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = final_index.txt; sourceTree = "<group>"; };
 		3B0C7DD62044993200280231 /* pairs.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = pairs.txt; sourceTree = "<group>"; };
 		3B0C7DD7204686D100280231 /* origin_index.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = origin_index.txt; sourceTree = "<group>"; };
 		3B0C7DED204F834200280231 /* bpt.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bpt.cc; sourceTree = "<group>"; };
@@ -100,6 +101,7 @@
 				3B0C7DEE204F834200280231 /* bpt.h */,
 				3B0C7DEF204F834200280231 /* predefined.h */,
 				3B1760FA204212E1002B4A9C /* origin_reader.h */,
+				3859913F205773E80065D7AA /* final_index.txt */,
 				3B1760FD2042138E002B4A9C /* index_reader.h */,
 				3B1760F72042129E002B4A9C /* sorter.cpp */,
 				3B1760F620421291002B4A9C /* sorter.h */,

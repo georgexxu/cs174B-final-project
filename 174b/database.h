@@ -42,9 +42,42 @@ public:
         tree.insert(key2, 4);
     };//insert to bplus tree
     
-    void load(string filename){//load directly from the disk
+    void load(string filename){//load index2 directly from the disk
         
-    }
+            //open file
+            //insert entries to the tree
+            //close file
+            tree.init_from_empty();
+        
+            fstream myfile;
+            myfile.open(filename);
+            if(!myfile){
+                cout<<"Cannot open input file...loading failed"<<endl;
+                return;
+            }
+            string keyword;
+            string num;
+            char key[16];
+            while(myfile){
+                
+                myfile>>keyword;
+//                keyword.erase(std::remove(keyword.begin(), keyword.end(), '\\'), keyword.end());
+                keyword = keyword.substr(0,15);
+                std::strcpy(key,keyword.c_str());
+                myfile>>num;
+                try {
+                    //
+                    int page_num = stoi(num);
+                    cout<<"keyword: "<<keyword<<" leng: "<<keyword.length()<<" page: "<<num<<endl;
+                    tree.insert(key, page_num);
+                }catch(const char* msg){
+                    cerr << msg << endl;
+                }
+                
+            }
+            
+        }
+    
     
     void search(char * key){//use the tree search
         bpt::value_t value;
@@ -74,7 +107,8 @@ public:
         ifstream myfile;
         ofstream outputfile;
         string line;
-        int page_pos = -1; //set as 1 first
+        string pre_line;
+        long start_pos = -1; //set as 1 first
 
         myfile.open("origin_index.txt");
         outputfile.open("new_origin_index.txt");
@@ -87,7 +121,12 @@ public:
         while (myfile >> line)
         {
             cout << line << endl;
-            myfile.ignore(1000, '\n');
+            if(key < line){
+                cout<<"find start pos before "<<line<<endl;
+                break;
+            }
+            myfile.ignore(1001, '\n');
+            start_pos = myfile.tellg();
         }
         
         
@@ -128,7 +167,7 @@ public:
                 cout<<"scan through "<<word2<<" ";
                 if (foundkey and (word2=="DOC"+doc)){
 //                    b_exact_pos = myfile.tellg();
-                    break;;
+                    break;
                 }
                 else{
                     foundkey=0;

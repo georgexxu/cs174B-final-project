@@ -89,7 +89,7 @@ public:
     meta_t get_meta() const {
         return meta;
     };
-
+    void init_from_empty();
 #ifndef UNIT_TEST
 private:
 #else
@@ -99,8 +99,7 @@ public:
     meta_t meta;
 
     /* init empty tree */
-    void init_from_empty();
-
+    
     /* find index */
     off_t search_index(const key_t &key) const;
 
