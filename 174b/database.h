@@ -101,6 +101,7 @@ public:
             //open file
             //insert entries to the tree
             //close file
+            tree.init_from_empty();
             fstream myfile;
             myfile.open(filename);
             if(!myfile){
@@ -118,7 +119,7 @@ public:
                 std::strcpy(key,keyword.c_str());
                 myfile>>num;
                 try {
-                    //
+                    
                     int page_num = stoi(num);
                     cout<<"keyword: "<<keyword<<" leng: "<<keyword.length()<<" page: "<<num<<endl;
                     tree.insert(key, page_num);

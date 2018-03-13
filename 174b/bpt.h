@@ -91,7 +91,7 @@ public:
     };
 
 #ifndef UNIT_TEST
-private:
+public:
 #else
 public:
 #endif

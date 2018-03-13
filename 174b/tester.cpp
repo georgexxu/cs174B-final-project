@@ -28,7 +28,12 @@ int main(void) {
 //    writer wt("txt",1000);
 //    wt.write_from_index1("temperary_name.txt");
 //    return 0;
-//    
+//
+    
+    string weird("122222222   ");
+    int num = stoi(weird);
+    cout<<"num "<<num<<endl;
+
     
 
 
@@ -83,6 +88,8 @@ int main(void) {
     cin>>proceed;
     database dbs;
     //dbs.test_load(&index_reader_o2);
+    dbs.merge("sec_file.txt", &writer2);
+
     dbs.load("final_index.txt");
     char key[16] ={"heard"};
     cout<<"search the keyword feng"<<endl;
@@ -112,8 +119,8 @@ int main(void) {
         cout<<" "<<it->first<<" "<<it->second<<endl;
     }
     
-    dbs1.merge("sec_file.txt", &writer2);
-    
+    dbs.merge("sec_file.txt", &writer2);
+    database dbs3;
     writer2.write_from_index1("origin_index.txt");
     dbs.load("final_index.txt");
     //    return 0;
