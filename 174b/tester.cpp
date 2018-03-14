@@ -32,18 +32,10 @@ int main(void) {
 //    return 0;
 //
     
-    string weird("122222222   ");
-    int num = stoi(weird);
-    cout<<"num "<<num<<endl;
-
-    
-
-
 
     int page_num = 1000;
-    int proceed;
-    cout<<"enter an int to proceed"<<endl;
-    cin>>proceed;
+    
+    
     string filename = "test.txt";
 
     cout<<"start class origin read"<<endl;
@@ -59,8 +51,7 @@ int main(void) {
     original_reader.duplicate_eliminate();
     cout<<"After duplicate elimination: "<<endl<<endl;
    // original_reader.print_pairs();
-    cout<<"enter an int to proceed"<<endl;
-    cin>>proceed;
+    
     //test writer
     cout<<"start writing origin_index"<<endl;
     writer writer("origin_index.txt",page_num);
@@ -68,19 +59,7 @@ int main(void) {
     cout<<"Finished writing the inverted index file"<<endl<<endl;
     //testing index_reader
     
-//    cout<<"enter an int to proceed"<<endl;
-//    cin>>proceed;
-//    string filename2 = "origin_index.txt";
-//    cout<<"start class index_reader"<<endl;
-//    index_reader index_reader_o2(filename2);
-//    index_reader_o2.print_pairs();
-//    cout<<"index reader tested!"<<endl;
-//    
-    cout<<"enter an int to proceed"<<endl;
-    cin>>proceed;
-//    //test writer for index_reader
-//    cout<<"start writing index"<<endl;
-    class writer writer2("xt",1000);
+    class writer writer2("xt",page_num);
     writer2.write_from_index1("origin_index.txt");
     cout<<"Finished writing the final index file"<<endl<<endl;
 
@@ -88,8 +67,7 @@ int main(void) {
     writer2.write_from_index1("origin_index.txt");
     //testing the tree
     cout<<"test the tree start here"<<endl;
-    cout<<"enter an int to proceed"<<endl;
-    cin>>proceed;
+    
     database dbs;
     //dbs.test_load(&index_reader_o2);
     dbs.merge("sec_file.txt", &writer2);
@@ -104,29 +82,6 @@ int main(void) {
     cout<<"Please give me the range search range"<<endl;
     
 
-    //test delete
-    dbs.delete_key_doc("about", "120", &writer2);
-
-    cout<<"parseline + merging part  "<<endl;
-    cout<<"enter an int to proceed"<<endl;
-    cin>>proceed;
-
-
-    fstream myfile;
-    myfile.open("origin_index.txt");
-    string word;
-    string line;
-    std::getline(myfile, line);
-    database dbs1;
-    std::vector<std::pair<string, string> > holder;
-    while(myfile){
-        std::getline(myfile, line);
-        dbs1.parse_line(holder, line);
-    }
-    for( std::vector<std::pair <string, string> >::iterator it = holder.begin(); it != holder.end(); ++it ){
-        cout<<" "<<it->first<<" "<<it->second<<endl;
-    }
-    
     dbs.merge("sec_file.txt", &writer2);
     database dbs3;
     writer2.write_from_index1("origin_index.txt");
@@ -134,15 +89,21 @@ int main(void) {
     //    return 0;
     
     
-    //update index2 after delete
-    writer2.write_from_index1("origin_index.txt");
-    //load again
-    dbs.load("final_index.txt");
+    //test delete
+//    dbs.delete_key_doc("could", "1", &writer2);
+    
+
+//    //update index2 after delete
+//    writer2.write_from_index1("origin_index.txt");
+//    //load again
+//    dbs.load("final_index.txt");
     
     
     //test insert
-    dbs.insert_key_doc("allocate", "DOC11", &writer2);
-    
+    cout<<"test insert"<<endl;
+    dbs.insert_key_doc("couple", "DOC1", &writer2, "origin_index.txt");
+    //test delete doc
+    dbs.delete_document("DOC6", &writer2, "origin_index.txt");
     
     cout<<"end!!!!"<<endl;
     return 0;

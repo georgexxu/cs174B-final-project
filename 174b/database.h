@@ -101,6 +101,7 @@ public:
             //open file
             //insert entries to the tree
             //close file
+            
             tree.init_from_empty();
             fstream myfile;
             myfile.open(filename);
@@ -319,38 +320,127 @@ public:
     }
 
     
-    void insert_key_doc(string key,string doc, writer* p_writer){
+    void insert_key_doc(string key,string doc, writer* p_writer, string filename){
         ifstream myfile;
         ofstream outputfile;
         string line;
         string pre_line;
+        char key_char[16];
+        std::strcpy(key_char,key.c_str());
+        bpt::value_t page_pos;
         long start_pos = -1; //set as 1 first
 
-        myfile.open("origin_index.txt");
+        myfile.open(filename);  //index 1 file name
         outputfile.open("new_origin_index.txt");
         
         if(!myfile){
             cout<<"Cannot open input file"<<endl;
         }
         
+        
         //seek for the insert page
-        while (myfile >> line)
-        {
-            cout << line << endl;
-            if(key < line){
+        if(tree.search(key_char, &page_pos)==0 ){
+            myfile.seekg( (page_pos-1) * p_writer->get_page_size() );
+            cout<<"find "<<key<<" at page "<<page_pos<<"from the tree"<<endl;
+            cout<<"set to"<<(page_pos-1) * p_writer->get_page_size()<<endl;///////
+        }
+        else{
+            while (myfile >> line){
+                cout <<"scan through " << line << endl;
+                if(key < line){
+                    cout<<"find start pos before "<<line<<endl;
+                    break;
+                }
+                start_pos = (myfile.tellg()/p_writer->get_page_size()) * p_writer->get_page_size();
+                myfile.ignore(1001, '\n');
+                
+            }
+            myfile.seekg(start_pos);
+            cout<<"set to "<<start_pos<<endl;
+        }
+        
+        
+        //seek for the insert place
+        while (myfile>>line){
+            cout <<"scan through " << line << endl;
+            
+            if(line >= key){
                 cout<<"find start pos before "<<line<<endl;
                 break;
             }
-            myfile.ignore(1001, '\n');
+            
+            myfile>>line;   // skip the docxx
             start_pos = myfile.tellg();
+        }
+        
+        //set to pos at the insert location
+        myfile.seekg(start_pos);
+        
+        // start to write the new file
+        cout<<"start update the origin_index"<<endl;/////
+        long c_pos=-1;
+        myfile.seekg(0);
+        
+        //copy the previous lines
+        for(int i=0; i<page_pos-1; i++){
+            getline(myfile,line);
+            c_pos = myfile.tellg();
+            
+            outputfile<<line;
+            outputfile<<"\n";
+        }
+        
+        std::vector<std::pair <string, string> >string_str_pairs;
+        stringPair s_s_pair(key,doc);
+        string_str_pairs.push_back(s_s_pair);
+        
+        getline(myfile,line);
+        parse_line(string_str_pairs, line);
+        cout<<endl<<line;
+        sort(string_str_pairs.begin(), string_str_pairs.end());
+        for( std::vector<std::pair <string, string> >::iterator it = string_str_pairs.begin(); it != string_str_pairs.end(); it++ ){
+            long position = outputfile.tellp();
+            if (position % p_writer->get_page_size() > (p_writer->get_page_size() - 100)){
+                //outputfile<<"\n";
+                outputfile.seekp((position/p_writer->get_page_size()+1)*p_writer->get_page_size()-1);
+                outputfile<<"\n";
+            }
+            cout<<endl<<it->first<<" "<<it->second<<" ";
+            outputfile<<it->first<<" "<<it->second<<" ";
+        }
+        string_str_pairs.clear();
+
+        while(getline(myfile,line)){
+       
+            parse_line(string_str_pairs, line);
+            cout<<endl<<line;
+            for( std::vector<std::pair <string, string> >::iterator it = string_str_pairs.begin(); it != string_str_pairs.end(); it++ ){
+                long position = outputfile.tellp();
+                if (position % p_writer->get_page_size() > (p_writer->get_page_size() - 100)){
+                    //outputfile<<"\n";
+                    outputfile.seekp((position/p_writer->get_page_size()+1)*p_writer->get_page_size()-1);
+                    outputfile<<"\n";
+                }
+                cout<<endl<<it->first<<" "<<it->second<<" ";
+                outputfile<<it->first<<" "<<it->second<<" ";
+            }
+            string_str_pairs.clear();
+            
         }
         
         
         myfile.close();
         outputfile.close();
+        cout<<"finish writing new origin index"<<endl;/////
+        char filename_char[30];
+        std::strcpy(filename_char,filename.c_str());
+        remove(filename_char);
+        rename("new_origin_index.txt", filename_char);
+
+        p_writer->write_from_index1(filename);
+        load("final_index.txt");
         
-    //location: 3
-        //
+    
     }
     void delete_key_doc(string key, string doc, writer* p_writer){
         ifstream myfile;
@@ -379,7 +469,7 @@ public:
             }
             
             myfile.seekg( (page_pos-1) * p_writer->get_page_size() );
-            cout<<"set to"<<page_pos * p_writer->get_page_size()<<endl;///////
+            cout<<"set to"<<(page_pos-1) * p_writer->get_page_size()<<endl;///////
             bool foundkey=0;
             while (myfile >> word2){
                 cout<<"scan through "<<word2<<" ";
@@ -395,14 +485,16 @@ public:
                     b_exact_pos = myfile.tellg();
                     foundkey=1;
                     cout<<"found "<<word2<<endl;
+                    word1 = word2;
                     continue;
                 }
                 word1 = word2;
                 f_exact_pos = myfile.tellg();
+//                cout<<f_exact_pos;
                 
             }
             cout<<"front word "<<word1<<" pos at"<<f_exact_pos<<endl;////
-            cout<<"find the word "<<word2<<"at"<<b_exact_pos<<endl;////
+            cout<<"find the word "<<word2<<" ends at"<<b_exact_pos<<endl;////
             myfile >> word2;b_exact_pos = myfile.tellg();
             
             
@@ -410,23 +502,29 @@ public:
             cout<<"start update the origin_index"<<endl;/////
             long c_pos=-1;
             myfile.seekg(0);
+            
             //copy the previous lines
             for(int i=0; i<page_pos-1; i++){
                 getline(myfile,line);
                 c_pos = myfile.tellg();
+
                 outputfile<<line;
                 outputfile<<"\n";
             }
+            
+            
             //copy the content in this line before the key
+            
+            
+            
             while(c_pos < f_exact_pos){
                 myfile>>line;
+                cout<<line<<' ';
                 c_pos = myfile.tellg();
                 outputfile<<line<<" ";
             }
             
-            myfile.ignore(50,' ');
-            myfile.ignore(50,' ');
-            myfile.ignore(50,' ');
+            myfile.ignore();
             
             bool odd = 0;
             while(myfile>>line)
@@ -447,16 +545,79 @@ public:
             outputfile.close();
             cout<<"finish writing new origin index"<<endl;/////
         }
-    
+        
         tree.remove(key_char);
         cout<<"removed node from tree"<<endl;////
         remove( "origin_index.txt");
         rename("new_origin_index.txt", "origin_index.txt");
     }
     
+    void delete_document(string doc,writer* p_writer, string filename){
+        ifstream myfile;
+        ofstream outputfile;
+        string line;
+        
+        myfile.open(filename);  //index 1 file name
+        outputfile.open("new_origin_index.txt");
+        
+        if(!myfile){
+            cout<<"Cannot open input file"<<endl;
+        }
+        
+        std::vector<std::pair <string, string> >string_str_pairs;
+        
+
+        while(getline(myfile,line)){
+            
+            parse_line(string_str_pairs, line);
+//            cout<<endl<<line;
+            for( std::vector<std::pair <string, string> >::iterator it = string_str_pairs.begin(); it != string_str_pairs.end(); ){
+                
+                cout<<endl<<"scan through "<<it->first<<" "<<it->second<<" ";
+                if(it->second == doc){
+                    cout<<endl<<"delete "<<it->first<<" "<<it->second<<" ";
+                    it = string_str_pairs.erase(it);
+                    
+                }
+                else
+                    it++;
+            }
+            
+            for( std::vector<std::pair <string, string> >::iterator it = string_str_pairs.begin(); it != string_str_pairs.end();it++ ){
+                long position = outputfile.tellp();
+                if (position % p_writer->get_page_size() > (p_writer->get_page_size() - 100)){
+                    //outputfile<<"\n";
+                    outputfile.seekp((position/p_writer->get_page_size()+1)*p_writer->get_page_size()-1);
+                    outputfile<<"\n";
+                }
+//                cout<<endl<<it->first<<" "<<it->second<<" ";
+                outputfile<<it->first<<" "<<it->second<<" ";
+            }
+            string_str_pairs.clear();
+            
+        }
+        
+        
+        myfile.close();
+        outputfile.close();
+        cout<<"finish writing new origin index"<<endl;/////
+        
+        
+        char filename_char[30];
+        std::strcpy(filename_char,filename.c_str());
+        remove(filename_char);
+        rename("new_origin_index.txt", filename_char);
+        
+        p_writer->write_from_index1(filename);
+        load("final_index.txt");
+        
+        
+
+        
+    }
     
         
-        int count(string keyword);
+    int count(string keyword);
     int printpath(string keyword);
     void range (char* k1, char*  k2);//: Range query. Print all of the keywords between keyword1 and keyword2where keyword1 < keyword2
     

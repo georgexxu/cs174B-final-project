@@ -31,6 +31,7 @@
 
 /* Begin PBXFileReference section */
 		3859913F205773E80065D7AA /* final_index.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = final_index.txt; sourceTree = "<group>"; };
+		385991402057BBF20065D7AA /* new_origin_index.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = new_origin_index.txt; sourceTree = "<group>"; };
 		3B0C7DD62044993200280231 /* pairs.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = pairs.txt; sourceTree = "<group>"; };
 		3B0C7DED204F834200280231 /* bpt.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bpt.cc; sourceTree = "<group>"; };
 		3B0C7DEE204F834200280231 /* bpt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bpt.h; sourceTree = "<group>"; };
@@ -105,6 +106,7 @@
 				3B323D6E2057551A00DAB5BE /* sec_file.txt */,
 				3B323D6C2057526B00DAB5BE /* final_index.txt */,
 				3B323D6D2057526B00DAB5BE /* origin_index.txt */,
+				385991402057BBF20065D7AA /* new_origin_index.txt */,
 				3B1760FA204212E1002B4A9C /* origin_reader.h */,
 				3859913F205773E80065D7AA /* final_index.txt */,
 				3B1760FD2042138E002B4A9C /* index_reader.h */,
