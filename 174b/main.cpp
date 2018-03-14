@@ -21,7 +21,12 @@
 using namespace std;
 
 int main(void) {
-    
+//    string weird = "  12key";
+//    if(std::isspace(weird.at(0))){
+//        cout<<weird<<endl;
+//    }
+//    return 0;
+////
 	std::string quit("quit");
 	std::string build("build_index");
 	std::string load("load");
@@ -37,15 +42,18 @@ int main(void) {
     command_checker command_check;
     database dbs;
     
-    int page_num;
+    int page_num = 8096;//by default
+    int page_size = 8096;//by default
     cout<<"Please set the number of pages for the buffer! Input an integer. "<<endl;
-    cin>>page_num;//modify??
-	//console console1(8000);
+//    string num;
+//    cin>>page_num;//modify?? yes
+    //console console1(8000);
     //sample code for using vector, pair, etc
     typedef std::pair <string, string> stringPair;
     typedef std::pair <int, string> int_stringPair;
 
     std::string command;
+    int first_time = 1;
 	while(std::getline(cin,command)){
 	    //timer start
         std::clock_t start;
@@ -53,124 +61,182 @@ int main(void) {
 		start = std::clock();
         //check command
         vector<string> parsed_command;//make it a list, no need
-        
-        if(command_check.check(command)){
-            parsed_command= command_check.parse_command(command);//more in parse_command
-            cout<<"size of the vector"<<parsed_command.size()<<endl;
-            for (std::vector<string>::iterator it = parsed_command.begin() ; it != parsed_command.end(); ++it)
-                //std::cout<<*it<<" "<<"end ";
-            cout<<endl; //testing parse_command
-        }
-        else{
-            cout<<"there might be some typo in your command"<<endl;
-        }
         string command_1;
-        if(!parsed_command.empty())
-             command_1= parsed_command.front();
+        if(first_time){
+            if(std::isdigit(command.at(0))){
+                page_num = stoi(command);
+                first_time = 0;
+                continue;
+            }
+            cout<<"please provide an integer"<<endl;
+            continue;
+        }else{//not first input
+            if(command_check.check(command)){
+                //cout<<"start parsing"<<endl;
+                parsed_command= command_check.parse_command(command);//more in parse_command
+                //cout<<"size of the vector"<<parsed_command.size()<<endl;
+//                for (std::vector<string>::iterator it = parsed_command.begin() ; it != parsed_command.end(); ++it)
+//                    std::cout<<*it<<" "<<"end ";
+                cout<<endl; //testing parse_command
+            }
+            else{
+                cout<<"there might be some typo in your command"<<endl;
+            }
+            if(!parsed_command.empty())
+                 command_1= parsed_command.front();
         
-		if(command_1.compare(quit)==0){
-			cout<<"Quiting ..."<<endl;
-			duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
-			cout<<"duration is "<<duration<<endl;
-			break;
-		}else if(command_1.compare(build)==0){
-			cout<<"starting to build the index file"<<endl;
-            //put reader and writer in console, call console.build(....).
-            //console1.build("text.txt","origin_index",1000);
-            int page_size=1000;
-            string text_file = "yelp_final_dataset";
-            string index_file = "origin_index.txt";
-            cout<<"start class origin read"<<endl;
-            origin_reader original_reader(text_file);
-            cout<<"Before sorting"<<endl<<endl;
-            //original_reader.print_pairs();
-            sorter sorter;
-            sorter.sortvec( &original_reader );
-            cout<<"After sorting"<<endl<<endl;
-            original_reader.duplicate_eliminate();
-            //original_reader.print_pairs();
-            writer writer(index_file,page_size);
-            writer.write( &original_reader );// 写出index1文件
-            original_reader.clear();//empty the vector
-            cout<<"Finished writing the inverted index file"<<endl<<endl;
-			duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
-			cout<<"duration is "<<duration<<endl;
-		}else if(command_1.compare(load)==0){
-			cout<<"loading..."<<endl;
-            class writer writer2("xt",1000);
-            writer2.write_from_index1("origin_index.txt");
-            cout<<"Finished writing the final index file"<<endl;
-            //dbs.test_load(&index_reader_o2);
-            dbs.load("final_index.txt");
-			duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
-			cout<<"duration is "<<duration<<endl;
-        }else if(command_1.compare(merge)==0){
-            cout<<"merging..."<<endl;
-            class writer writer2("xt",1000);//page_size is 1000
-            dbs.merge("sec_file.txt", &writer2);
-            duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
-            cout<<"duration is "<<duration<<endl;
+            if(command_1.compare(quit)==0){
+                cout<<"Quiting ..."<<endl;
+                duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
+                cout<<"duration is "<<duration<<endl;
+                break;
+            }else if(command_1.compare(build)==0){
+                cout<<"starting to build the index file"<<endl;
+                //put reader and writer in console, call console.build(....).
+                //console1.build("text.txt","origin_index",1000);
+                if(parsed_command.size()>=4){//build_index text index -p size
+                    string text_file = "yelp_final_dataset";
+                    string index_file = "origin_index.txt";
+                    std::vector<string>::iterator it = parsed_command.begin();
+                    text_file = parsed_command.at(1);
+                    index_file =parsed_command.at(2);
+                    if(parsed_command.size()>=5)//empty space cause problem
+                        page_size = stoi(parsed_command.at(4));//potential fault
+                    cout<<"start class origin read"<<endl;
+                    origin_reader original_reader(text_file);
+                    cout<<"Before sorting"<<endl<<endl;
+                    //original_reader.print_pairs();
+                    sorter sorter;
+                    sorter.sortvec( &original_reader );
+                    cout<<"After sorting"<<endl<<endl;
+                    original_reader.duplicate_eliminate();
+                    //original_reader.print_pairs();
+                    writer writer(index_file,page_size);
+                    writer.write( &original_reader );// 写出index1文件
+                    original_reader.clear();//empty the vector
+                    cout<<"Finished writing the inverted index file"<<endl<<endl;
+                    duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
+                    cout<<"duration is "<<duration<<endl;
+                }
+            }else if(command_1.compare(load)==0){
+                if(parsed_command.size()>=2){
+                    cout<<"loading..."<<endl;
+                    string index1 = parsed_command.at(1);
+                    cout<<index1<<endl;
+                    class writer writer2("xt",page_size);
+                    writer2.write_from_index1(index1);
+                    cout<<"Finished writing the final index file"<<endl;
+                    //dbs.test_load(&index_reader_o2);
+                    dbs.load("final_index.txt");
+                    duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
+                    cout<<"duration is "<<duration<<endl;
+                }
+            }else if(command_1.compare(merge)==0){
+                if(parsed_command.size()>=2){
+                    cout<<"merging..."<<endl;
+                    string sec_index_f = parsed_command.at(1);
+                    class writer writer2("xt",page_size);//page_size is 1000
+                    dbs.merge(sec_index_f, &writer2);
+                    duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
+                    cout<<"duration is "<<duration<<endl;
+                }
+            }
+            else if(command_1.compare(insert)==0){// to do
+                if(parsed_command.size()>=3){
+                    cout<<"inserting..."<<endl;
+                    class writer writer2("xt",page_size);//page_size is 1000
+                    string keyword =parsed_command.at(1);
+                    string doc_name =parsed_command.at(2);
+                    dbs.insert_key_doc(keyword, doc_name, &writer2, "origin_index.txt");
+                    writer2.write_from_index1("origin_index.txt");
+                    dbs.load("final_index.txt");
+                    //load the b+ index again
+                    duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
+                    cout<<"duration is "<<duration<<endl;
+                }else{
+                    cout<<"error, please insert a <keyword,docname> pair"<<endl;
+                }
+            }else if(command_1.compare(delete_key)==0){//to do
+                if(parsed_command.size()>=2){
+                    cout<<"deleting <key,doc> pair..."<<endl;
+                    class writer writer2("xt",page_size);//page_size is 1000
+                    string doc_name = parsed_command.at(1);
+                    dbs.delete_document("DOC1", &writer2, "origin_index.txt");
+                    writer2.write_from_index1("origin_index.txt");
+                    dbs.load("final_index.txt");
+                    duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
+                    cout<<"duration is "<<duration<<endl;
+                }
+            }else if(command_1.compare(count)==0){
+                if(parsed_command.size()>=2){
+                    cout<<"counting occurence of the key..."<<endl;
+                    class writer writer2("xt",page_size);//page_size is 1000
+                    string keyword = parsed_command.at(1);
+                    keyword = keyword.substr(0,15);
+                    char key[16];
+                    std::strcpy(key,keyword.c_str());
+                    int counter = dbs.count(key, &writer2);
+                    cout<<"the number of occurrence: "<<counter<<endl;
+                    duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
+                    cout<<"duration is "<<duration<<endl;
+                }
+            }else if(command_1.compare(search)==0){
+                if(parsed_command.size()>=2){
+                    cout<<"searching the a key or multiple keys..."<<endl;
+                        for(int i = 0;i<parsed_command.size()-1;i++){
+                            class writer writer2("xt",page_size);//page_size is 1000
+                            string keyword =parsed_command.at(i+1);
+                            keyword=keyword.substr(0,15);
+                            char key[16];
+                            std::strcpy(key,keyword.c_str());
+                            dbs.search(key, &writer2);
+                    }
+                    duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
+                    cout<<"duration is "<<duration<<endl;//damn search multiple here!! for loop
+                // dont forget to convert from string to char*
+                }
+            }else if(command_1.compare(printpath)==0){
+                    if(parsed_command.size()>=2){
+                    cout<<"tracing the path of the key... "<<endl;
+                    class writer writer2("xt",page_size);//page_size is 1000
+                    string keyword = parsed_command.at(1);
+                    keyword = keyword.substr(0,15);
+                    char key[16];
+                    std::strcpy(key,keyword.c_str());
+                    dbs.printpath(key);
+                    duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
+                    cout<<"duration is "<<duration<<endl;
+                }
+            }else if(command_1.compare(page_i)==0){
+                string num = parsed_command.at(1);
+                if(std::isdigit(num.at(0))){
+                    int i = stoi(num);
+                    cout<<"looking at content at the specified page..."<<endl;
+                    class writer writer2("xt",page_size);//page_size is 8096 by default
+                    dbs.page(i, &writer2);
+                    duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
+                    cout<<"duration is "<<duration<<endl;
+                }else{
+                    cout<<"invalid page number"<<endl;
+                }
+            }else if(command_1.compare(range)==0){
+                if(parsed_command.size()>=2){
+                    cout<<"range query..."<<endl;
+                    string keyword1 = parsed_command.at(1);
+                    string keyword2 = parsed_command.at(2);
+                    keyword1 = keyword1.substr(0,15);
+                    keyword2 = keyword2.substr(0,15);
+                    char key1[16];
+                    char key2[16];
+                    std::strcpy(key1,keyword1.c_str());
+                    std::strcpy(key2,keyword2.c_str());
+                    dbs.range_search(key1, key2);
+                    duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
+                    cout<<"duration is "<<duration<<endl;
+                }
+            }
+            
         }
-        else if(command_1.compare(insert)==0){// to do
-			cout<<"inserting..."<<endl;
-            class writer writer2("xt",1000);//page_size is 1000
-            dbs.insert_key_doc("couple", "DOC1", &writer2, "origin_index.txt");
-            writer2.write_from_index1("origin_index.txt");
-            dbs.load("final_index.txt");
-            //load the b+ index again
-            
-			duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
-			cout<<"duration is "<<duration<<endl;
-        }else if(command_1.compare(delete_key)==0){//to do
-            cout<<"deleting <key,doc> pair..."<<endl;
-            class writer writer2("xt",1000);//page_size is 1000
-            dbs.delete_document("DOC1", &writer2, "origin_index.txt");
-            writer2.write_from_index1("origin_index.txt");
-            dbs.load("final_index.txt");
-            duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
-            cout<<"duration is "<<duration<<endl;
-            
-        }else if(command_1.compare(count)==0){
-            cout<<"counting occurence of the key..."<<endl;
-            class writer writer2("xt",1000);//page_size is 1000
-            char key[16]={"but"};
-            int counter = dbs.count(key, &writer2);
-            cout<<"the number of occurrence: "<<counter<<endl;
-            duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
-            cout<<"duration is "<<duration<<endl;
-        }else if(command_1.compare(search)==0){
-            cout<<"searching the a key or multiple keys..."<<endl;
-            class writer writer2("xt",1000);//page_size is 1000
-            char key[16]={"but"};
-            dbs.search(key, &writer2);
-            duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
-            cout<<"duration is "<<duration<<endl;//damn search multiple here!! for loop
-            // dont forget to convert from string to char*
-            
-        }else if(command_1.compare(printpath)==0){
-            cout<<"tracing the path of the key... "<<endl;
-            class writer writer2("xt",1000);//page_size is 1000
-            char key[16]={"but"};
-            dbs.printpath(key);
-            duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
-            cout<<"duration is "<<duration<<endl;
-            
-        }else if(command_1.compare(page_i)==0){
-            cout<<"looking at content at the specified page..."<<endl;
-            class writer writer2("xt",1000);//page_size is 1000
-            dbs.page(4, &writer2);
-            duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
-            cout<<"duration is "<<duration<<endl;
-        }else if(command_1.compare(range)==0){
-            cout<<"range query..."<<endl;
-            char key1[16]={"but"};
-            char key2[16]={"difference"};
-            dbs.range_search(key1, key2);
-            duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
-            cout<<"duration is "<<duration<<endl;
-        }
-        
-
 	}
 
 

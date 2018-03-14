@@ -1,5 +1,5 @@
 //Important!!
-//This disk-based bplus tree implementation is found from the following website
+//This disk-based bplus tree implementation is modified from the following version from the website below.
 //https://github.com/zcbenz/BPlusTree.
 //The MIT License (MIT)
 //Copyright (c) 2012 Zhao Cheng

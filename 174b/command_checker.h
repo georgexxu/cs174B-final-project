@@ -39,7 +39,7 @@ public:
         this->num = num;
     }//constructor
     
-    bool check(string command){// to be implemented
+    bool check(string command){
         
         string cmd = command.substr(0, command.find(' '));
         cout<<"checking"<<endl;
@@ -60,13 +60,17 @@ public:
         
         istringstream iss(command);
         
-        do
-        {
+        while(iss){
             string subs;
             iss >> subs;
-            v.push_back(subs);
-            
-        } while (iss);
+            //cout<<"inside parse, check space"<<endl;
+            if(!subs.empty()){
+                if(!std::isspace(subs.at(0)))
+                    //cout<<"inside"<<endl;
+                    v.push_back(subs);
+            }
+            //cout<<"end parse"<<endl;
+        }
         //v.pop_back();// somehow added a space at the end
         cout<<"finished parse"<<endl;
         return v;

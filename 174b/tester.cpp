@@ -31,7 +31,7 @@ int main(void) {
 //    wt.write_from_index1("temperary_name.txt");
 //    return 0;
 //
-    
+
 
     int page_num = 1000;
     
