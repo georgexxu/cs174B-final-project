@@ -7,7 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3B53F3F72058EB9800BE27AB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B53F3F62058EB9800BE27AB /* main.cpp */; };
+		3B53F40F2058EBAC00BE27AB /* bpt.cc in Sources */ = {isa = PBXBuildFile; fileRef = 3B53F3FD2058EBAC00BE27AB /* bpt.cc */; };
+		3B53F4102058EBAC00BE27AB /* converter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B53F4012058EBAC00BE27AB /* converter.cpp */; };
+		3B53F4112058EBAC00BE27AB /* database.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B53F4032058EBAC00BE27AB /* database.cpp */; };
+		3B53F4122058EBAC00BE27AB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B53F4062058EBAC00BE27AB /* main.cpp */; };
+		3B53F4132058EBAC00BE27AB /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 3B53F4072058EBAC00BE27AB /* Makefile */; };
+		3B53F4142058EBAC00BE27AB /* page.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B53F4092058EBAC00BE27AB /* page.cpp */; };
+		3B53F4152058EBAC00BE27AB /* tester.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B53F40D2058EBAC00BE27AB /* tester.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,7 +30,24 @@
 
 /* Begin PBXFileReference section */
 		3B53F3F32058EB9800BE27AB /* 174b */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = 174b; sourceTree = BUILT_PRODUCTS_DIR; };
-		3B53F3F62058EB9800BE27AB /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		3B53F3FD2058EBAC00BE27AB /* bpt.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bpt.cc; sourceTree = "<group>"; };
+		3B53F3FE2058EBAC00BE27AB /* bpt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bpt.h; sourceTree = "<group>"; };
+		3B53F3FF2058EBAC00BE27AB /* command_checker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = command_checker.h; sourceTree = "<group>"; };
+		3B53F4002058EBAC00BE27AB /* console.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = console.h; sourceTree = "<group>"; };
+		3B53F4012058EBAC00BE27AB /* converter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = converter.cpp; sourceTree = "<group>"; };
+		3B53F4022058EBAC00BE27AB /* converter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = converter.h; sourceTree = "<group>"; };
+		3B53F4032058EBAC00BE27AB /* database.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = database.cpp; sourceTree = "<group>"; };
+		3B53F4042058EBAC00BE27AB /* database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = database.h; sourceTree = "<group>"; };
+		3B53F4052058EBAC00BE27AB /* index_reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = index_reader.h; sourceTree = "<group>"; };
+		3B53F4062058EBAC00BE27AB /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		3B53F4072058EBAC00BE27AB /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		3B53F4082058EBAC00BE27AB /* origin_reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = origin_reader.h; sourceTree = "<group>"; };
+		3B53F4092058EBAC00BE27AB /* page.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = page.cpp; sourceTree = "<group>"; };
+		3B53F40A2058EBAC00BE27AB /* page.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = page.h; sourceTree = "<group>"; };
+		3B53F40B2058EBAC00BE27AB /* predefined.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = predefined.h; sourceTree = "<group>"; };
+		3B53F40C2058EBAC00BE27AB /* sorter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sorter.h; sourceTree = "<group>"; };
+		3B53F40D2058EBAC00BE27AB /* tester.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tester.cpp; sourceTree = "<group>"; };
+		3B53F40E2058EBAC00BE27AB /* writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = writer.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +80,24 @@
 		3B53F3F52058EB9800BE27AB /* 174b */ = {
 			isa = PBXGroup;
 			children = (
-				3B53F3F62058EB9800BE27AB /* main.cpp */,
+				3B53F3FD2058EBAC00BE27AB /* bpt.cc */,
+				3B53F3FE2058EBAC00BE27AB /* bpt.h */,
+				3B53F3FF2058EBAC00BE27AB /* command_checker.h */,
+				3B53F4002058EBAC00BE27AB /* console.h */,
+				3B53F4012058EBAC00BE27AB /* converter.cpp */,
+				3B53F4022058EBAC00BE27AB /* converter.h */,
+				3B53F4032058EBAC00BE27AB /* database.cpp */,
+				3B53F4042058EBAC00BE27AB /* database.h */,
+				3B53F4052058EBAC00BE27AB /* index_reader.h */,
+				3B53F4062058EBAC00BE27AB /* main.cpp */,
+				3B53F4072058EBAC00BE27AB /* Makefile */,
+				3B53F4082058EBAC00BE27AB /* origin_reader.h */,
+				3B53F4092058EBAC00BE27AB /* page.cpp */,
+				3B53F40A2058EBAC00BE27AB /* page.h */,
+				3B53F40B2058EBAC00BE27AB /* predefined.h */,
+				3B53F40C2058EBAC00BE27AB /* sorter.h */,
+				3B53F40D2058EBAC00BE27AB /* tester.cpp */,
+				3B53F40E2058EBAC00BE27AB /* writer.h */,
 			);
 			path = 174b;
 			sourceTree = "<group>";
@@ -119,7 +159,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3B53F3F72058EB9800BE27AB /* main.cpp in Sources */,
+				3B53F4132058EBAC00BE27AB /* Makefile in Sources */,
+				3B53F4102058EBAC00BE27AB /* converter.cpp in Sources */,
+				3B53F4142058EBAC00BE27AB /* page.cpp in Sources */,
+				3B53F4152058EBAC00BE27AB /* tester.cpp in Sources */,
+				3B53F40F2058EBAC00BE27AB /* bpt.cc in Sources */,
+				3B53F4122058EBAC00BE27AB /* main.cpp in Sources */,
+				3B53F4112058EBAC00BE27AB /* database.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
