@@ -15,7 +15,6 @@
 #include <stdio.h>
 #include<algorithm>
 #include<vector>
-#include "converter.h"
 using namespace std;
 
 typedef std::pair <string, string> stringPair;
