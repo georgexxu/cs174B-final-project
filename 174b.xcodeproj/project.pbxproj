@@ -26,6 +26,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		38AAFC01205A6FAE00E33DD8 /* log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = log.h; sourceTree = "<group>"; };
 		3B53F3F32058EB9800BE27AB /* 174b */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = 174b; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B53F3FD2058EBAC00BE27AB /* bpt.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bpt.cc; sourceTree = "<group>"; };
 		3B53F3FE2058EBAC00BE27AB /* bpt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bpt.h; sourceTree = "<group>"; };
@@ -88,6 +89,7 @@
 				3B53F4072058EBAC00BE27AB /* Makefile */,
 				3B53F4162059057700BE27AB /* yelp_final_dataset */,
 				3B53F4082058EBAC00BE27AB /* origin_reader.h */,
+				38AAFC01205A6FAE00E33DD8 /* log.h */,
 				3B53F41920590C9A00BE27AB /* final_index.txt */,
 				3B53F41C2059BAEE00BE27AB /* origin_index.txt */,
 				3B53F41820590AB700BE27AB /* origin_index */,
@@ -288,6 +290,7 @@
 				3B53F3FC2058EB9800BE27AB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

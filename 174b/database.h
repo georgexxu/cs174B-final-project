@@ -567,7 +567,59 @@ public:
     int printpath(string keyword);
     void range (char* k1, char*  k2);//: Range query. Print all of the keywords between keyword1 and keyword2where keyword1 < keyword2
     
+    void rollback(int n, writer* p_writer, string filename){
+        ifstream myfile;
+        ofstream outputfile;
+        string line;
 
+        myfile.open(filename);
+        vector<string> logs;
+        int line_counter = 0;
+        while(getline(myfile, line)){
+            if(line_counter == n) break;
+            logs.push_back(line);
+            line_counter++;
+            cout<<"pushed "<<line<<endl;
+        }
+        
+        vector<string> orders;
+        
+        while (!logs.empty()){
+            line = logs.back();
+            //            cout<<"before parse: "<<line<<endl;
+            string delimiter = " ";
+            size_t pos = 0;
+            string token;
+            while ((pos = line.find(delimiter)) != std::string::npos) {
+                token = line.substr(0, pos);
+                //                std::cout << token << std::endl;
+                orders.push_back(token);
+                line.erase(0, pos + delimiter.length());
+            }
+            //            cout<<line<<endl;
+            orders.push_back(line);
+            
+            //execute rollback here start
+            if (orders.front() == "insert"){
+                orders.erase(orders.begin());
+                string key,doc;
+                key = orders.front();
+                doc = orders.back();
+                p_dbs->delete_key_doc(key,doc,p_writer,indexname);
+            }
+            else if (orders.front() == "delete"){
+                orders.erase(orders.begin());
+                string key,doc;
+                key = orders.front();
+                doc = orders.back();
+            }
+            
+            logs.pop_back();
+            orders.clear();
+        }
+    }
+    
+    
 };
 
 
