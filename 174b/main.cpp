@@ -32,28 +32,35 @@ int main(void) {
 	std::string load("load");
 	std::string merge("merge");
 	std::string insert("insert");
-	std::string delete_key("delete");
+	std::string delete_doc("delete");
     std::string count("count");
     std::string search("search");
     std::string printpath("printpath");
     std::string page_i("page");
     std::string range("range");
     std::string search_test("search_test");
+    std::string rollback("rollback");
+
     command_checker command_check;
     database dbs;
+    log log("log.txt");
     
     int page_num = 8096;//by default
     int page_size = 8096;//by default
-    cout<<"Please set the number of pages for the buffer! Input an integer. "<<endl;
+    cout<<endl;cout<<endl;
+    cout<<"====================================================================="<<endl;
+    cout<<"Welcome to use the database designed by:"<<endl<<"George, Xiaofeng Xu"<<endl<<"Aden, Yuting Pang"<<endl<<endl;
+    
 //    string num;
 //    cin>>page_num;//modify?? yes
     //console console1(8000);
     //sample code for using vector, pair, etc
     typedef std::pair <string, string> stringPair;
     typedef std::pair <int, string> int_stringPair;
-
     std::string command;
     int first_time = 1;
+    
+    cout<<"Please set the number of pages for the buffer! Input an integer. "<<endl;
 	while(std::getline(cin,command)){
 	    //timer start
         std::clock_t start;
@@ -71,6 +78,13 @@ int main(void) {
             cout<<"please provide an integer"<<endl;
             continue;
         }else{//not first input
+            //build the UI
+            cout<<endl<<endl;
+//            cout<<"Please Enter the command and press ENTER. Please pay attention to the format: "<<endl;
+//            cout<<"1. Build Index: "<<endl<<"\t"<<"build_index data_file_name index_file_name page_size_in_integer"<<endl;
+            
+            
+            
             if(command_check.check(command)){
                 //cout<<"start parsing"<<endl;
                 parsed_command= command_check.parse_command(command);//more in parse_command
@@ -91,10 +105,10 @@ int main(void) {
                 cout<<"duration is "<<duration<<endl;
                 break;
             }else if(command_1.compare(build)==0){
-                cout<<"starting to build the index file"<<endl;
                 //put reader and writer in console, call console.build(....).
                 //console1.build("text.txt","origin_index",1000);
                 if(parsed_command.size()>=4){//build_index text index -p size
+                    cout<<"starting to build the index file"<<endl;
                     string text_file = "yelp_final_dataset";
                     string index_file = "origin_index.txt";
                     std::vector<string>::iterator it = parsed_command.begin();
@@ -117,7 +131,10 @@ int main(void) {
                     cout<<"Finished writing the inverted index file"<<endl<<endl;
                     duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
                     cout<<"duration is "<<duration<<endl;
+                }else{
+                    cout<<"There is some typo in your command."<<endl;
                 }
+                
             }else if(command_1.compare(load)==0){
                 if(parsed_command.size()>=2){
                     cout<<"loading..."<<endl;
@@ -147,7 +164,7 @@ int main(void) {
                     class writer writer2("xt",page_size);//page_size is 1000
                     string keyword =parsed_command.at(1);
                     string doc_name =parsed_command.at(2);
-                    dbs.insert_key_doc(keyword, doc_name, &writer2, "origin_index.txt");
+                    dbs.insert_key_doc(keyword, doc_name, &writer2, "origin_index.txt",&log);
                     writer2.write_from_index1("origin_index.txt");
                     dbs.load("final_index.txt");
                     //load the b+ index again
@@ -156,12 +173,12 @@ int main(void) {
                 }else{
                     cout<<"error, please insert a <keyword,docname> pair"<<endl;
                 }
-            }else if(command_1.compare(delete_key)==0){//to do
+            }else if(command_1.compare(delete_doc)==0){//to do
                 if(parsed_command.size()>=2){
-                    cout<<"deleting <key,doc> pair..."<<endl;
+                    cout<<"deleting all pair in this doc..."<<endl;
                     class writer writer2("xt",page_size);//page_size is 1000
                     string doc_name = parsed_command.at(1);
-                    dbs.delete_document("DOC1", &writer2, "origin_index.txt");
+                    dbs.delete_document("DOC1", &writer2, "origin_index.txt",&log);
                     writer2.write_from_index1("origin_index.txt");
                     dbs.load("final_index.txt");
                     duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
@@ -234,6 +251,19 @@ int main(void) {
                     duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
                     cout<<"duration is "<<duration<<endl;
                 }
+            }else if(command_1.compare(rollback)==0){
+                string num = parsed_command.at(1);
+                if(std::isdigit(num.at(0))){
+                    cout<<"rollback..."<<endl;
+                    int n = stoi(num);
+                    class writer writer2("xt",page_size);
+                    dbs.rollback(n, &writer2, "origin_index.txt", &log);
+                    duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
+                    cout<<"duration is "<<duration<<endl;
+                }else{
+                    cout<<"invalid page number"<<endl;
+                }
+
             }
             
         }

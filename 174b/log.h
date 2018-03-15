@@ -26,13 +26,16 @@ private:
     ifstream myfile;
     
 public:
-    log(){
-        this->filename = "log.txt";
+    log(string name){
+        this->filename = name;
         ofstream flush;
         flush.open(filename, std::ofstream::out | std::ofstream::trunc);
         flush.close();
     }
     
+    string get_logname(){
+        return filename;
+    }
     void write_insert_log(string key, string doc){
         ofstream outputfile(filename, std::ios_base::app | std::ios_base::out);
         outputfile<<"insert"<<" "<<key<<" "<<doc<<"\n";

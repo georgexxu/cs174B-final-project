@@ -1,0 +1,5 @@
+insert almoss DOC1
+insert couple DOC2
+insert coupon DOC1
+insert alphaaa DOC1
+delete alphaaa DOC1

@@ -36,7 +36,7 @@ int main(void) {
     int page_num = 1000;
     
     
-    string filename = "test.txt";
+    string filename = "yelp_final_dataset";
 
     cout<<"start class origin read"<<endl;
     origin_reader original_reader(filename);
@@ -69,8 +69,8 @@ int main(void) {
     cout<<"test the tree start here"<<endl;
     
     database dbs;
-    //dbs.test_load(&index_reader_o2);
-    dbs.merge("sec_file.txt", &writer2);
+//    //dbs.test_load(&index_reader_o2);
+//    dbs.merge("sec_file.txt", &writer2);
 
     dbs.load("final_index.txt");
     char key[16] ={"heard"};
@@ -82,11 +82,11 @@ int main(void) {
     cout<<"Please give me the range search range"<<endl;
     
 
-    dbs.merge("sec_file.txt", &writer2);
-    database dbs3;
-    writer2.write_from_index1("origin_index.txt");
-    dbs.load("final_index.txt");
-<<<<<<< HEAD
+//    dbs.merge("sec_file.txt", &writer2);
+//    database dbs3;
+//    writer2.write_from_index1("origin_index.txt");
+//    dbs.load("final_index.txt");
+
     cout<<"testing search"<<endl;
     char but[16] ={"but"};
     char chinatown[16]={"chinatown"};
@@ -99,26 +99,21 @@ int main(void) {
     dbs.printpath(but);
     cout<<"print page 4 content:"<<endl;
     dbs.page(4, &writer2);
-=======
-    //    return 0;
-    
-    
-    //test delete
-//    dbs.delete_key_doc("could", "1", &writer2);
-    
->>>>>>> b28092998a6ab98dc0ee0ad6c98aab4068e5cc1c
 
-//    //update index2 after delete
-//    writer2.write_from_index1("origin_index.txt");
-//    //load again
-//    dbs.load("final_index.txt");
     
-    
+    log log("log.txt");
     //test insert
-    cout<<"test insert"<<endl;
-    dbs.insert_key_doc("couple", "DOC1", &writer2, "origin_index.txt");
+    cout<<endl<<"test insert"<<endl;
+    dbs.insert_key_doc("almoss", "DOC1", &writer2, "origin_index.txt",&log);
+    dbs.insert_key_doc("couple", "DOC2", &writer2, "origin_index.txt",&log);
+    dbs.insert_key_doc("coupon", "DOC1", &writer2, "origin_index.txt",&log);
+    dbs.insert_key_doc("alphaaa", "DOC1", &writer2, "origin_index.txt",&log);
+
     //test delete doc
-    dbs.delete_document("DOC6", &writer2, "origin_index.txt");
+//    dbs.delete_document("DOC6", &writer2, "origin_index.txt", &log);
+    
+    //test rollback
+    dbs.rollback(1, &writer2, "origin_index.txt", &log );
     
     cout<<"end!!!!"<<endl;
     return 0;
