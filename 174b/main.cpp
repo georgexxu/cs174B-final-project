@@ -8,11 +8,13 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include<string>
+//#include<string>
+#include<cstring>
 #include<iostream>
 //#include"console.h"
 #include"bpt.h"
-#include"time.h"
+//#include"time.h"
+#include<ctime>
 #include"database.h"
 #include "command_checker.h"
 #include<vector>
