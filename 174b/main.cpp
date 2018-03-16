@@ -157,7 +157,7 @@ int main(void) {
                     cout<<"merging..."<<endl;
                     string sec_index_f = parsed_command.at(1);
                     class writer writer2("xt",page_size);//page_size is 1000
-                    dbs.merge(sec_index_f, &writer2);
+                    dbs.merge(g_index_file,sec_index_f, &writer2);
                     duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
                     cout<<"duration is "<<duration<<endl;
                 }
@@ -169,6 +169,7 @@ int main(void) {
                     string keyword =parsed_command.at(1);
                     string doc_name =parsed_command.at(2);
                     dbs.insert_key_doc(keyword, doc_name, &writer2, g_index_file,&log);
+                    log.write_insert_log(keyword, doc_name);
                     writer2.write_from_index1(g_index_file);
                     dbs.load("final_index.txt");
                     //load the b+ index again
@@ -183,6 +184,7 @@ int main(void) {
                     class writer writer2("xt",page_size);//page_size is 1000
                     string doc_name = parsed_command.at(1);
                     dbs.delete_document(doc_name, &writer2, g_index_file,&log);
+                    
                     writer2.write_from_index1(g_index_file);
                     dbs.load("final_index.txt");
                     duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
@@ -257,12 +259,10 @@ int main(void) {
                 }
             }else if(command_1.compare(rollback)==0){
                 string num = parsed_command.at(1);
-                cout<<"num:"<<num;
-                int a;
+                //                cout<<"num:"<<num;
                 if(std::isdigit(num.at(0))){
                     cout<<"rollback..."<<endl;
                     int n = stoi(num);
-                    cin>>a;
                     class writer writer2("xt",page_size);
                     dbs.rollback(n, &writer2, g_index_file, &log);
                     duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;

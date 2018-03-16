@@ -27,13 +27,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3B1FC785205B94DB005C0168 /* merged.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = merged.txt; sourceTree = "<group>"; };
 		3B1FC786205BA796005C0168 /* test2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test2.cpp; sourceTree = "<group>"; };
-		3B1FC788205BAB46005C0168 /* index1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index1.txt; sourceTree = "<group>"; };
-		3B1FC789205BCED3005C0168 /* temp1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = temp1.txt; sourceTree = "<group>"; };
-		3B1FC78A205C2D66005C0168 /* origin_index.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = origin_index.txt; sourceTree = "<group>"; };
-		3B1FC78B205C3945005C0168 /* temp2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = temp2.txt; sourceTree = "<group>"; };
-		3B1FC78C205C856F005C0168 /* test.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test.txt; sourceTree = "<group>"; };
+		3B1FC78D205C8922005C0168 /* text.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = text.txt; sourceTree = "<group>"; };
 		3B36B9EC205B7CA10049CD06 /* 174b */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = 174b; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B36B9F6205B7CBB0049CD06 /* bpt.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bpt.cc; sourceTree = "<group>"; };
 		3B36B9F8205B7CE80049CD06 /* bpt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bpt.h; sourceTree = "<group>"; };
@@ -50,7 +45,6 @@
 		3B36BA0B205B7CE80049CD06 /* sorter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sorter.h; sourceTree = "<group>"; };
 		3B36BA0F205B7CE80049CD06 /* tester.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tester.cpp; sourceTree = "<group>"; };
 		3B36BA11205B7CE80049CD06 /* writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = writer.h; sourceTree = "<group>"; };
-		3B36BA1B205B8F070049CD06 /* p0sorted.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = p0sorted.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,18 +84,12 @@
 				3B36B9FD205B7CE80049CD06 /* external_sorter.h */,
 				3B1FC786205BA796005C0168 /* test2.cpp */,
 				3B36B9FF205B7CE80049CD06 /* index_reader.h */,
-				3B36BA1B205B8F070049CD06 /* p0sorted.txt */,
-				3B1FC785205B94DB005C0168 /* merged.txt */,
 				3B36BA00205B7CE80049CD06 /* log.h */,
-				3B1FC78A205C2D66005C0168 /* origin_index.txt */,
-				3B1FC78C205C856F005C0168 /* test.txt */,
-				3B1FC788205BAB46005C0168 /* index1.txt */,
+				3B1FC78D205C8922005C0168 /* text.txt */,
 				3B36BA03205B7CE80049CD06 /* main.cpp */,
 				3B36BA05205B7CE80049CD06 /* Makefile */,
 				3B36BA07205B7CE80049CD06 /* origin_reader.h */,
 				3B36BA09205B7CE80049CD06 /* predefined.h */,
-				3B1FC78B205C3945005C0168 /* temp2.txt */,
-				3B1FC789205BCED3005C0168 /* temp1.txt */,
 				3B36BA0B205B7CE80049CD06 /* sorter.h */,
 				3B36BA0F205B7CE80049CD06 /* tester.cpp */,
 				3B36BA11205B7CE80049CD06 /* writer.h */,
