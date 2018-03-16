@@ -1,5 +1,7 @@
-insert almoss DOC1
-insert couple DOC2
-insert coupon DOC1
-insert alphaaa DOC1
-delete alphaaa DOC1
+insert aden DOC10
+insert aden DOC11
+insert george DOC12 *
+insert yuting DOC100 *
+insert xiaofeng DOC92 *
+insert xiaofeng DOC15 *
+insert xiaofeng DOC4 *

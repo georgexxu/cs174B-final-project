@@ -101,20 +101,30 @@ int main(void) {
     dbs.page(4, &writer2);
 
     
-    log log("log.txt");
+    logg log("log.txt");
     //test insert
     cout<<endl<<"test insert"<<endl;
+    dbs.insert_key_doc("yuting", "DOC3", &writer2, "origin_index.txt", &log);
+    log.write_insert_log("yuting", "DOC3");
     dbs.insert_key_doc("almoss", "DOC1", &writer2, "origin_index.txt",&log);
+    log.write_insert_log("almoss", "DOC1");
     dbs.insert_key_doc("couple", "DOC2", &writer2, "origin_index.txt",&log);
+    log.write_insert_log("couple", "DOC2");
     dbs.insert_key_doc("coupon", "DOC1", &writer2, "origin_index.txt",&log);
+    log.write_insert_log("coupon", "DOC1");
     dbs.insert_key_doc("alphaaa", "DOC1", &writer2, "origin_index.txt",&log);
+    log.write_insert_log("alphaaa", "DOC1");
+    
 
     //test delete doc
 //    dbs.delete_document("DOC6", &writer2, "origin_index.txt", &log);
-    
+    int a;
     //test rollback
-    dbs.rollback(1, &writer2, "origin_index.txt", &log );
-    
+//    cin>>a;
+    dbs.rollback(2, &writer2, "origin_index.txt", &log );
+//    cin>>a;
+    dbs.rollback(2, &writer2, "origin_index.txt", &log );
+
     cout<<"end!!!!"<<endl;
     return 0;
 };

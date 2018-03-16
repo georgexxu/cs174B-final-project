@@ -43,10 +43,11 @@ int main(void) {
 
     command_checker command_check;
     database dbs;
-    log log("log.txt");
+    logg log("log.txt");
     
     int page_num = 8096;//by default
     int page_size = 8096;//by default
+    string g_index_file;
     cout<<endl;cout<<endl;
     cout<<"====================================================================="<<endl;
     cout<<"Welcome to use the database designed by:"<<endl<<"George, Xiaofeng Xu"<<endl<<"Aden, Yuting Pang"<<endl<<endl;
@@ -111,9 +112,11 @@ int main(void) {
                     cout<<"starting to build the index file"<<endl;
                     string text_file = "yelp_final_dataset";
                     string index_file = "origin_index.txt";
+                    
                     std::vector<string>::iterator it = parsed_command.begin();
                     text_file = parsed_command.at(1);
                     index_file =parsed_command.at(2);
+                    //g_index_file = index_file;
                     if(parsed_command.size()>=5)//empty space cause problem
                         page_size = stoi(parsed_command.at(4));//potential fault
                     cout<<"start class origin read"<<endl;
@@ -139,6 +142,7 @@ int main(void) {
                 if(parsed_command.size()>=2){
                     cout<<"loading..."<<endl;
                     string index1 = parsed_command.at(1);
+                    g_index_file =index1;
                     cout<<index1<<endl;
                     class writer writer2("xt",page_size);
                     writer2.write_from_index1(index1);
@@ -153,7 +157,7 @@ int main(void) {
                     cout<<"merging..."<<endl;
                     string sec_index_f = parsed_command.at(1);
                     class writer writer2("xt",page_size);//page_size is 1000
-                    dbs.merge(sec_index_f, &writer2);
+                    dbs.merge(g_index_file,sec_index_f, &writer2);
                     duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
                     cout<<"duration is "<<duration<<endl;
                 }
@@ -164,8 +168,9 @@ int main(void) {
                     class writer writer2("xt",page_size);//page_size is 1000
                     string keyword =parsed_command.at(1);
                     string doc_name =parsed_command.at(2);
-                    dbs.insert_key_doc(keyword, doc_name, &writer2, "origin_index.txt",&log);
-                    writer2.write_from_index1("origin_index.txt");
+                    dbs.insert_key_doc(keyword, doc_name, &writer2, g_index_file,&log);
+                    log.write_insert_log(keyword, doc_name);
+                    writer2.write_from_index1(g_index_file);
                     dbs.load("final_index.txt");
                     //load the b+ index again
                     duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
@@ -178,8 +183,9 @@ int main(void) {
                     cout<<"deleting all pair in this doc..."<<endl;
                     class writer writer2("xt",page_size);//page_size is 1000
                     string doc_name = parsed_command.at(1);
-                    dbs.delete_document("DOC1", &writer2, "origin_index.txt",&log);
-                    writer2.write_from_index1("origin_index.txt");
+                    dbs.delete_document(doc_name, &writer2, g_index_file,&log);
+                    
+                    writer2.write_from_index1(g_index_file);
                     dbs.load("final_index.txt");
                     duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
                     cout<<"duration is "<<duration<<endl;
@@ -253,11 +259,12 @@ int main(void) {
                 }
             }else if(command_1.compare(rollback)==0){
                 string num = parsed_command.at(1);
+//                cout<<"num:"<<num;
                 if(std::isdigit(num.at(0))){
                     cout<<"rollback..."<<endl;
                     int n = stoi(num);
                     class writer writer2("xt",page_size);
-                    dbs.rollback(n, &writer2, "origin_index.txt", &log);
+                    dbs.rollback(n, &writer2, g_index_file, &log);
                     duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
                     cout<<"duration is "<<duration<<endl;
                 }else{

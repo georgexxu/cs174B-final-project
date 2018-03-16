@@ -45,7 +45,7 @@ public:
         cout<<"checking"<<endl;
         if (cmd.compare("build_index")==0 or cmd.compare("load")==0 or cmd.compare("merge")==0
             or cmd.compare("insert")==0 or cmd.compare("delete")==0 or cmd.compare("count")==0 or cmd.compare("search")==0
-            or cmd.compare("printpath")==0 or cmd.compare("range")==0 or cmd.compare("page")==0 or cmd.compare("quit")==0){
+            or cmd.compare("printpath")==0 or cmd.compare("range")==0 or cmd.compare("page")==0 or cmd.compare("quit")==0 or cmd.compare("rollback")==0){
             this->num = 1;
             cout<<"checked"<<endl;
             return true;
