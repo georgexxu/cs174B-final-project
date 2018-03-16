@@ -17,13 +17,14 @@
 #include <fstream>
 #include <ostream>
 #include<algorithm>
+#include "log.h"
 using bpt::bplus_tree;
 
 class database{
-
+    
 private:
     bplus_tree tree;
-
+    
 public:
     database():tree("test.db",true){
         
@@ -44,94 +45,94 @@ public:
         tree.insert(key2, 4);
     };//insert to bplus tree
     
-//    void load(string filename,writer * p_writer){//load directly from the disk
-//        //open file
-//        //insert entries to the tree
-//        //close file
-//        fstream myfile;
-//        myfile.open(filename);
-//        if(!myfile){
-//            cout<<"Cannot open input file...loading failed"<<endl;
-//            return;
-//        }
-//        cerr<<"readingfile starts"<<endl;
-//        int line_counter = 1;
-//        while(myfile){
-//            string line = "";
-//            string keyword = "";
-//            string page_num = "";
-//            char delim = ' ';
-//            char key[16];
-//            int count_even_odd = 1; //1 is odd
-//            std::getline(myfile,line); // get the line
-//            cerr<<"after getting aline "<<endl;
-//            auto i = 0;
-//            cerr<<"getting line: "<<endl;
-//            auto pos = line.find(delim);
-//            while(pos!=string::npos){
-//                if(count_even_odd ==1){//keyword part
-//                    keyword=line.substr(i,pos-i);
-//                    cout<<"keyword: "<<keyword<<"  ";
-//                    keyword.erase(std::remove(keyword.begin(), keyword.end(), '\\'), keyword.end());
-//                    std::strcpy(key,keyword.c_str());
-//                    i = ++pos;//keep reading the line
-//                    pos = line.find(delim,pos);
-//                    count_even_odd = 0;
-//                }else{// page number part
-//                    page_num=line.substr(i,pos-i);
-//                    cout<<"page_num: "<<page_num<<endl;
-//                    int page_number = stoi(page_num);///potential danger
-//                    tree.insert(key, page_number);
-//                    if(pos > (p_writer->page_size - 30)){
-//                        break;
-//                    }
-//                    i = ++pos;//keep reading the line
-//                    pos = line.find(delim,pos);
-//                    count_even_odd = 1;
-//                }
-//                
-//            }
-//            line_counter++;
-//        }
-//        myfile.close();
-//    }
+    //    void load(string filename,writer * p_writer){//load directly from the disk
+    //        //open file
+    //        //insert entries to the tree
+    //        //close file
+    //        fstream myfile;
+    //        myfile.open(filename);
+    //        if(!myfile){
+    //            cout<<"Cannot open input file...loading failed"<<endl;
+    //            return;
+    //        }
+    //        cerr<<"readingfile starts"<<endl;
+    //        int line_counter = 1;
+    //        while(myfile){
+    //            string line = "";
+    //            string keyword = "";
+    //            string page_num = "";
+    //            char delim = ' ';
+    //            char key[16];
+    //            int count_even_odd = 1; //1 is odd
+    //            std::getline(myfile,line); // get the line
+    //            cerr<<"after getting aline "<<endl;
+    //            auto i = 0;
+    //            cerr<<"getting line: "<<endl;
+    //            auto pos = line.find(delim);
+    //            while(pos!=string::npos){
+    //                if(count_even_odd ==1){//keyword part
+    //                    keyword=line.substr(i,pos-i);
+    //                    cout<<"keyword: "<<keyword<<"  ";
+    //                    keyword.erase(std::remove(keyword.begin(), keyword.end(), '\\'), keyword.end());
+    //                    std::strcpy(key,keyword.c_str());
+    //                    i = ++pos;//keep reading the line
+    //                    pos = line.find(delim,pos);
+    //                    count_even_odd = 0;
+    //                }else{// page number part
+    //                    page_num=line.substr(i,pos-i);
+    //                    cout<<"page_num: "<<page_num<<endl;
+    //                    int page_number = stoi(page_num);///potential danger
+    //                    tree.insert(key, page_number);
+    //                    if(pos > (p_writer->page_size - 30)){
+    //                        break;
+    //                    }
+    //                    i = ++pos;//keep reading the line
+    //                    pos = line.find(delim,pos);
+    //                    count_even_odd = 1;
+    //                }
+    //
+    //            }
+    //            line_counter++;
+    //        }
+    //        myfile.close();
+    //    }
     
     
-        void load(string filename){//load index2 directly from the disk
-            //open file
-            //insert entries to the tree
-            //close file
-            
-            tree.init_from_empty();
-            fstream myfile;
-            myfile.open(filename);
-            if(!myfile){
-                cout<<"Cannot open input file...loading failed"<<endl;
-                return;
-            }
-            string keyword;
-            string num;
-            char key[16];
-            while(myfile){
-                
-                myfile>>keyword;
-                keyword.erase(std::remove(keyword.begin(), keyword.end(), '\\'), keyword.end());
-                keyword = keyword.substr(0,15);
-                std::strcpy(key,keyword.c_str());
-                myfile>>num;
-                try {
-                    
-                    int page_num = stoi(num);
-                    //cout<<"keyword: "<<keyword<<" leng: "<<keyword.length()<<" page: "<<num<<endl;
-                    tree.insert(key, page_num);
-                }catch(const char* msg){
-                        cerr << msg << endl;
-                    }
-
-            }
-
+    void load(string filename){//load index2 directly from the disk
+        //open file
+        //insert entries to the tree
+        //close file
+        
+        tree.init_from_empty();
+        fstream myfile;
+        myfile.open(filename);
+        if(!myfile){
+            cout<<"Cannot open input file...loading failed"<<endl;
+            return;
         }
-
+        string keyword;
+        string num;
+        char key[16];
+        while(myfile){
+            
+            myfile>>keyword;
+            keyword.erase(std::remove(keyword.begin(), keyword.end(), '\\'), keyword.end());
+            keyword = keyword.substr(0,15);
+            std::strcpy(key,keyword.c_str());
+            myfile>>num;
+            try {
+                
+                int page_num = stoi(num);
+                //cout<<"keyword: "<<keyword<<" leng: "<<keyword.length()<<" page: "<<num<<endl;
+                tree.insert(key, page_num);
+            }catch(const char* msg){
+                cerr << msg << endl;
+            }
+            
+        }
+        
+    }
+    
     void parse_line(std::vector<std::pair <string, string> > &string_str_pairs1,string line1){
         char delim = ' ';
         auto i1 = 0;
@@ -199,11 +200,11 @@ public:
                             for( std::vector<std::pair <string, string> >::iterator it = string_str_pairs1.begin(); it != string_str_pairs1.end(); ++it ){
                                 long position = o_file.tellp();
                                 if (position % page_size > page_size - 100){
-                                //outputfile<<"\n";
-                                o_file.seekp((position/page_size+1)*page_size-1);
-                                o_file<<"\n";
+                                    //outputfile<<"\n";
+                                    o_file.seekp((position/page_size+1)*page_size-1);
+                                    o_file<<"\n";
                                 }
-                            o_file<<it->first<<" "<<it->second<<" ";
+                                o_file<<it->first<<" "<<it->second<<" ";
                             }
                             string_str_pairs1.clear();
                         }
@@ -214,7 +215,7 @@ public:
                                 //outputfile<<"\n";
                                 o_file.seekp((position/page_size+1)*page_size-1);
                                 o_file<<"\n";
-                            
+                                
                             }
                             o_file<<string_str_pairs1.begin()->first<<" "<<string_str_pairs1.begin()->second<<" ";
                             string_str_pairs1.erase(string_str_pairs1.begin());
@@ -308,7 +309,7 @@ public:
             myfile.open(current_file);
             myfile.seekp(page_num*p_writer->page_size);
             long pos = myfile.tellp();
-           //cout<<"current pos: "<<pos<<endl;
+            //cout<<"current pos: "<<pos<<endl;
             std::vector<std::pair <string, string> >string_str_pairs1;
             while(myfile){
                 string line = "";
@@ -331,7 +332,7 @@ public:
         //todo, read from disk
         //****also from this number search all the docnames and cout them
     };
-
+    
     int count(char * key,writer *p_writer){//use the tree search
         bpt::value_t value;
         string keyword(key);
@@ -371,7 +372,7 @@ public:
             }
             return counter;
         }
-
+        
     };
     
     void printpath(char* keyword){
@@ -404,24 +405,24 @@ public:
         
     }
     
-
+    
     void range_search(char *key1,char * key2){
         bpt::key_t start(key1);
         bpt::value_t values[512];
         bool next = true;
         while (next) {
             int ret = tree.search_range(
-                                            &start, key2, values, 512, &next);
+                                        &start, key2, values, 512, &next);
             if (ret < 0)
                 break;
-//            for (int i = 0; i < ret; i++)
-//                printf("%d\n", values[i]);
+            //            for (int i = 0; i < ret; i++)
+            //                printf("%d\n", values[i]);
         }//todo
         //cout all the keyword inbetween,later
     }
-
     
-    void insert_key_doc(string key,string doc, writer* p_writer, string filename){
+    
+    void insert_key_doc(string key,string doc, writer* p_writer, string filename, log* p_log){
         ifstream myfile;
         ofstream outputfile;
         string line;
@@ -430,7 +431,7 @@ public:
         std::strcpy(key_char,key.c_str());
         bpt::value_t page_pos;
         long start_pos = -1; //set as 1 first
-
+        
         myfile.open(filename);  //index 1 file name
         outputfile.open("new_origin_index.txt");
         
@@ -442,14 +443,14 @@ public:
         //seek for the insert page
         if(tree.search(key_char, &page_pos)==0 ){
             myfile.seekg( (page_pos-1) * p_writer->get_page_size() );
-            cout<<"find "<<key<<" at page "<<page_pos<<"from the tree"<<endl;
-            cout<<"set to"<<(page_pos-1) * p_writer->get_page_size()<<endl;///////
+//            cout<<"find "<<key<<" at page "<<page_pos<<"from the tree"<<endl;
+//            cout<<"set to"<<(page_pos-1) * p_writer->get_page_size()<<endl;///////
         }
         else{
             while (myfile >> line){
-                cout <<"scan through " << line << endl;
+//                cout <<"scan through " << line << endl;
                 if(key < line){
-                    cout<<"find start pos before "<<line<<endl;
+//                    cout<<"find start pos before "<<line<<endl;
                     break;
                 }
                 start_pos = (myfile.tellg()/p_writer->get_page_size()) * p_writer->get_page_size();
@@ -457,16 +458,16 @@ public:
                 
             }
             myfile.seekg(start_pos);
-            cout<<"set to "<<start_pos<<endl;
+//            cout<<"set to "<<start_pos<<endl;
         }
         
         
         //seek for the insert place
         while (myfile>>line){
-            cout <<"scan through " << line << endl;
+//            cout <<"scan through " << line << endl;
             
             if(line >= key){
-                cout<<"find start pos before "<<line<<endl;
+//                cout<<"find start pos before "<<line<<endl;
                 break;
             }
             
@@ -478,7 +479,7 @@ public:
         myfile.seekg(start_pos);
         
         // start to write the new file
-        cout<<"start update the origin_index"<<endl;/////
+//        cout<<"start update the origin_index"<<endl;/////
         long c_pos=-1;
         myfile.seekg(0);
         
@@ -497,7 +498,7 @@ public:
         
         getline(myfile,line);
         parse_line(string_str_pairs, line);
-        cout<<endl<<line;
+//        cout<<endl<<line;
         sort(string_str_pairs.begin(), string_str_pairs.end());
         for( std::vector<std::pair <string, string> >::iterator it = string_str_pairs.begin(); it != string_str_pairs.end(); it++ ){
             long position = outputfile.tellp();
@@ -506,185 +507,16 @@ public:
                 outputfile.seekp((position/p_writer->get_page_size()+1)*p_writer->get_page_size()-1);
                 outputfile<<"\n";
             }
-            cout<<endl<<it->first<<" "<<it->second<<" ";
+//            cout<<endl<<it->first<<" "<<it->second<<" ";
             outputfile<<it->first<<" "<<it->second<<" ";
         }
         string_str_pairs.clear();
-
-        while(getline(myfile,line)){
-       
-            parse_line(string_str_pairs, line);
-            cout<<endl<<line;
-            for( std::vector<std::pair <string, string> >::iterator it = string_str_pairs.begin(); it != string_str_pairs.end(); it++ ){
-                long position = outputfile.tellp();
-                if (position % p_writer->get_page_size() > (p_writer->get_page_size() - 100)){
-                    //outputfile<<"\n";
-                    outputfile.seekp((position/p_writer->get_page_size()+1)*p_writer->get_page_size()-1);
-                    outputfile<<"\n";
-                }
-                cout<<endl<<it->first<<" "<<it->second<<" ";
-                outputfile<<it->first<<" "<<it->second<<" ";
-            }
-            string_str_pairs.clear();
-            
-        }
         
-        
-        myfile.close();
-        outputfile.close();
-        cout<<"finish writing new origin index"<<endl;/////
-        char filename_char[30];
-        std::strcpy(filename_char,filename.c_str());
-        remove(filename_char);
-        rename("new_origin_index.txt", filename_char);
-
-        //p_writer->write_from_index1(filename);
-        //load("final_index.txt");
-        
-    
-    }
-    void delete_key_doc(string key, string doc, writer* p_writer){
-        ifstream myfile;
-        ofstream outputfile;
-        string line;
-        bpt::value_t page_pos;
-        char key_char[16];
-        std::string word1;
-        std::string word2;
-        std::strcpy(key_char,key.c_str());
-        long f_exact_pos = -1;
-        long b_exact_pos = -1;
-
-        //seek for the insert page from tree
-            //int page_pos = 1; //set as 1 first
-        if ( tree.search(key_char, &page_pos) != 0)
-            printf("Key %s not found\n", key_char);
-        else{
-            printf("Key %s found in page", key_char);
-            cout<<page_pos<<endl;////////
-            myfile.open("origin_index.txt");
-            outputfile.open("new_origin_index.txt",std::ofstream::out | std::ofstream::trunc);
-            
-            if(!myfile){
-                cout<<"Cannot open input file"<<endl;
-            }
-            
-            myfile.seekg( (page_pos-1) * p_writer->get_page_size() );
-            cout<<"set to"<<(page_pos-1) * p_writer->get_page_size()<<endl;///////
-            bool foundkey=0;
-            while (myfile >> word2){
-                cout<<"scan through "<<word2<<" ";
-                if (foundkey and (word2=="DOC"+doc)){
-//                    b_exact_pos = myfile.tellg();
-                    break;
-                }
-                else{
-                    foundkey=0;
-                }
-                    
-                if (key == word2){
-                    b_exact_pos = myfile.tellg();
-                    foundkey=1;
-                    cout<<"found "<<word2<<endl;
-                    word1 = word2;
-                    continue;
-                }
-                word1 = word2;
-                f_exact_pos = myfile.tellg();
-//                cout<<f_exact_pos;
-                
-            }
-            cout<<"front word "<<word1<<" pos at"<<f_exact_pos<<endl;////
-            cout<<"find the word "<<word2<<" ends at"<<b_exact_pos<<endl;////
-            myfile >> word2;b_exact_pos = myfile.tellg();
-            
-            
-            // start to write the new file
-            cout<<"start update the origin_index"<<endl;/////
-            long c_pos=-1;
-            myfile.seekg(0);
-            
-            //copy the previous lines
-            for(int i=0; i<page_pos-1; i++){
-                getline(myfile,line);
-                c_pos = myfile.tellg();
-
-                outputfile<<line;
-                outputfile<<"\n";
-            }
-            
-            
-            //copy the content in this line before the key
-            
-            
-            
-            while(c_pos < f_exact_pos){
-                myfile>>line;
-                cout<<line<<' ';
-                c_pos = myfile.tellg();
-                outputfile<<line<<" ";
-            }
-            
-            myfile.ignore();
-            
-            bool odd = 0;
-            while(myfile>>line)
-            {
-                long position = outputfile.tellp();
-                //              cout<<"position before write"<<position<<endl;
-                if ((position % p_writer->get_page_size() > p_writer->get_page_size() - 100) and odd != 1){
-                    outputfile<<"\n";
-                    //                cout<<"new page"<<endl;
-                    outputfile.seekp((position/p_writer->get_page_size()+1)*p_writer->get_page_size());
-                }
-                outputfile<< line<<" ";
-                odd = !odd;
-            }
-            
-
-            myfile.close();
-            outputfile.close();
-            cout<<"finish writing new origin index"<<endl;/////
-        }
-        
-        tree.remove(key_char);
-        cout<<"removed node from tree"<<endl;////
-        remove( "origin_index.txt");
-        rename("new_origin_index.txt", "origin_index.txt");
-    }
-    
-    void delete_document(string doc,writer* p_writer, string filename){
-        ifstream myfile;
-        ofstream outputfile;
-        string line;
-        
-        myfile.open(filename);  //index 1 file name
-        outputfile.open("new_origin_index.txt");
-        
-        if(!myfile){
-            cout<<"Cannot open input file"<<endl;
-        }
-        
-        std::vector<std::pair <string, string> >string_str_pairs;
-        
-
         while(getline(myfile,line)){
             
             parse_line(string_str_pairs, line);
 //            cout<<endl<<line;
-            for( std::vector<std::pair <string, string> >::iterator it = string_str_pairs.begin(); it != string_str_pairs.end(); ){
-                
-                cout<<endl<<"scan through "<<it->first<<" "<<it->second<<" ";
-                if(it->second == doc){
-                    cout<<endl<<"delete "<<it->first<<" "<<it->second<<" ";
-                    it = string_str_pairs.erase(it);
-                    
-                }
-                else
-                    it++;
-            }
-            
-            for( std::vector<std::pair <string, string> >::iterator it = string_str_pairs.begin(); it != string_str_pairs.end();it++ ){
+            for( std::vector<std::pair <string, string> >::iterator it = string_str_pairs.begin(); it != string_str_pairs.end(); it++ ){
                 long position = outputfile.tellp();
                 if (position % p_writer->get_page_size() > (p_writer->get_page_size() - 100)){
                     //outputfile<<"\n";
@@ -701,6 +533,122 @@ public:
         
         myfile.close();
         outputfile.close();
+//        cout<<"finish writing new origin index"<<endl;/////
+        char filename_char[30];
+        std::strcpy(filename_char,filename.c_str());
+        remove(filename_char);
+        rename("new_origin_index.txt", filename_char);
+        
+        p_log->write_insert_log(key, doc);
+        
+        p_writer->write_from_index1(filename);
+        load("final_index.txt");
+        
+        
+    }
+    
+    void delete_key_doc(string key, string doc, writer* p_writer, string filename, log* p_log){
+        ifstream myfile;
+        ofstream outputfile;
+        string line;
+        
+        myfile.open(filename);  //index 1 file name
+        outputfile.open("new_origin_index.txt");
+        
+        if(!myfile){
+            cout<<"Cannot open input file"<<endl;
+        }
+        
+        std::vector<std::pair <string, string> >string_str_pairs;
+        
+        while(getline(myfile,line)){
+            parse_line(string_str_pairs, line);
+            //            cout<<endl<<line;
+            for( std::vector<std::pair <string, string> >::iterator it = string_str_pairs.begin(); it != string_str_pairs.end(); ){
+                
+//                cout<<endl<<"scan through "<<it->first<<" "<<it->second<<" ";
+                if(it->second == doc and it->first == key){
+//                    cout<<endl<<"delete "<<it->first<<" "<<it->second<<" ";
+                    it = string_str_pairs.erase(it);
+                }
+                else
+                    it++;
+            }
+            for( std::vector<std::pair <string, string> >::iterator it = string_str_pairs.begin(); it != string_str_pairs.end();it++ ){
+                long position = outputfile.tellp();
+                if (position % p_writer->get_page_size() > (p_writer->get_page_size() - 100)){
+                    //outputfile<<"\n";
+                    outputfile.seekp((position/p_writer->get_page_size()+1)*p_writer->get_page_size()-1);
+                    outputfile<<"\n";
+                }
+                //                cout<<endl<<it->first<<" "<<it->second<<" ";
+                outputfile<<it->first<<" "<<it->second<<" ";
+            }
+            string_str_pairs.clear();
+        }
+        
+        myfile.close();
+        outputfile.close();
+//        cout<<"finish writing new origin index"<<endl;/////
+        
+        
+        char filename_char[30];
+        std::strcpy(filename_char,filename.c_str());
+        remove(filename_char);
+        rename("new_origin_index.txt", filename_char);
+        
+        p_log->write_delete_log(key, doc);
+        p_writer->write_from_index1(filename);
+        load("final_index.txt");
+        
+    }
+    
+    void delete_document(string doc,writer* p_writer, string filename, log* p_log){
+        ifstream myfile;
+        ofstream outputfile;
+        string line;
+        
+        myfile.open(filename);  //index 1 file name
+        outputfile.open("new_origin_index.txt");
+        
+        if(!myfile){
+            cout<<"Cannot open input file"<<endl;
+        }
+        
+        std::vector<std::pair <string, string> >string_str_pairs;
+        unsigned long count = 0;
+        while(getline(myfile,line)){
+            parse_line(string_str_pairs, line);
+            //            cout<<endl<<line;
+            for( std::vector<std::pair <string, string> >::iterator it = string_str_pairs.begin(); it != string_str_pairs.end(); ){
+                
+//                cout<<endl<<"scan through "<<it->first<<" "<<it->second<<" ";
+                if(it->second == doc){
+//                    cout<<endl<<"delete "<<it->first<<" "<<it->second<<" ";
+                    it = string_str_pairs.erase(it);
+                    count+=1;
+                    p_log->write_delete_log(it->first,it->second);
+                    
+                }
+                else
+                    it++;
+            }
+            for( std::vector<std::pair <string, string> >::iterator it = string_str_pairs.begin(); it != string_str_pairs.end();it++ ){
+                long position = outputfile.tellp();
+                if (position % p_writer->get_page_size() > (p_writer->get_page_size() - 100)){
+                    //outputfile<<"\n";
+                    outputfile.seekp((position/p_writer->get_page_size()+1)*p_writer->get_page_size()-1);
+                    outputfile<<"\n";
+                }
+                //                cout<<endl<<it->first<<" "<<it->second<<" ";
+                outputfile<<it->first<<" "<<it->second<<" ";
+            }
+            string_str_pairs.clear();
+        }
+        
+        myfile.close();
+        outputfile.close();
+        cout<<endl<<"deleted "<<count<<" words in total"<<endl;
         cout<<"finish writing new origin index"<<endl;/////
         
         
@@ -709,16 +657,72 @@ public:
         remove(filename_char);
         rename("new_origin_index.txt", filename_char);
         
-//        p_writer->write_from_index1(filename);
-//        load("final_index.txt");
         
-        
-
-        
+        p_writer->write_from_index1(filename);
+        load("final_index.txt");
     }
+    
+    void rollback(int n, writer* p_writer, string filename, log* p_log){
+        ifstream myfile;
+        string line;
+        
+        myfile.open(p_log->get_logname());  //logfilename
+  
+        vector<string> logs;
+        while(getline(myfile, line)){
+            logs.push_back(line);
+        }
+        int line_counter = 0;
+                
+        vector<string> orders;
+        unsigned long insert_count = 0;
+        unsigned long delete_count = 0;
 
-    void range (char* k1, char*  k2);//: Range query. Print all of the keywords between keyword1 and keyword2where keyword1 < keyword2
-
+        while (!logs.empty()){
+            if(line_counter >= n) break;
+            line = logs.back();
+                        cout<<"before parse: "<<line<<endl;
+            string delimiter = " ";
+            size_t pos = 0;
+            string token;
+            while ((pos = line.find(delimiter)) != std::string::npos) {
+                token = line.substr(0, pos);
+                //                std::cout << token << std::endl;
+                orders.push_back(token);
+                line.erase(0, pos + delimiter.length());
+            }
+                        cout<<line<<endl;
+            orders.push_back(line);
+            
+            
+            //execute rollback here start
+            if (orders.front() == "insert"){
+                orders.erase(orders.begin());
+                string key,doc;
+                key = orders.front();
+                doc = orders.back();
+                delete_key_doc(key,doc,p_writer,filename,p_log);
+                delete_count+=1;
+            }
+            else if (orders.front() == "delete"){
+                orders.erase(orders.begin());
+                string key,doc;
+                key = orders.front();
+                doc = orders.back();
+                insert_key_doc(key,doc,p_writer,filename,p_log);
+                insert_count+=1;
+            }
+            
+            logs.pop_back();
+            line_counter++;
+            orders.clear();
+        }
+        cout<<endl<<"finish rollback "<<n<<" operation(s)"<<endl;
+        cout<<"Including "<<insert_count<<" insertions and "<<delete_count<<" deletions"<<endl;
+    }
+    
+ 
+    
     void search_test(char * key,writer *p_writer){//use the tree search
         bpt::value_t value;
         string keyword(key);
