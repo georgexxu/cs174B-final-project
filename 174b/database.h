@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include<cstring>
 #include "index_reader.h"
 #include "predefined.h"
 #include <fstream>
