@@ -132,7 +132,7 @@ int main(void) {
                     duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
                     cout<<"duration is "<<duration<<endl;
                 }else{
-                    cout<<"There is some typo in your command."<<endl;
+                    cout<<"There might be some typo in your command."<<endl;
                 }
                 
             }else if(command_1.compare(load)==0){
