@@ -8,11 +8,13 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include<string>
+//#include<string>
+#include<cstring>
 #include<iostream>
 //#include"console.h"
 #include"bpt.h"
-#include"time.h"
+//#include"time.h"
+#include<ctime>
 #include"database.h"
 #include "command_checker.h"
 #include<vector>
@@ -142,11 +144,12 @@ int main(void) {
                     cout<<"loading..."<<endl;
                     string index1 = parsed_command.at(1);
                     g_index_file =index1;
-                    cout<<index1<<endl;
+                  //  cout<<index1<<endl;
                     class writer writer2("xt",page_size);
                     writer2.write_from_index1(index1);
-                    cout<<"Finished writing the final index file"<<endl;
+                    //cout<<"Finished writing the final index file"<<endl;
                     //dbs.test_load(&index_reader_o2);
+		cout<<"Creating b+ tree index..."<<endl;
                     dbs.load("final_index.txt");
                     duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
                     cout<<"duration is "<<duration<<endl;

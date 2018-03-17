@@ -19,6 +19,7 @@
 #include <ostream>
 #include<algorithm>
 #include "log.h"
+//using namespace std;
 using bpt::bplus_tree;
 
 class database{
@@ -36,7 +37,7 @@ public:
         {
             char key[16];
             const string string1(it->first);
-            std::strcpy(key,string1.c_str());
+	    std::strcpy(key,string1.c_str());
             tree.insert(key, it->second);
         }
         //manually insert some keys
