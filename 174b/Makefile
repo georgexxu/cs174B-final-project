@@ -1,5 +1,7 @@
-
-all: main.exe
+.PHONY: run
+	
+run: main.exe
+	./main.exe
 
 main.exe: main.o bpt.o
 	g++ -o main.exe main.o bpt.o
