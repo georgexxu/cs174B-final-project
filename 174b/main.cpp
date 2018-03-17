@@ -62,10 +62,10 @@ int main(void) {
     typedef std::pair <int, string> int_stringPair;
     std::string command;
     int first_time = 1;
-    
     cout<<"Please set the number of pages for the buffer! Input an integer. "<<endl;
     while(std::getline(cin,command)){
         //timer start
+        cout<<"Now, please type in your command!"<<endl;
         std::clock_t start;
         double duration;
         start = std::clock();
@@ -87,16 +87,14 @@ int main(void) {
             //            cout<<"1. Build Index: "<<endl<<"\t"<<"build_index data_file_name index_file_name page_size_in_integer"<<endl;
             
             
-            
             if(command_check.check(command)){
                 //cout<<"start parsing"<<endl;
                 parsed_command= command_check.parse_command(command);//more in parse_command
                 //cout<<"size of the vector"<<parsed_command.size()<<endl;
                 //                for (std::vector<string>::iterator it = parsed_command.begin() ; it != parsed_command.end(); ++it)
                 //                    std::cout<<*it<<" "<<"end ";
-                cout<<endl; //testing parse_command
-            }
-            else{
+                //cout<<endl; //testing parse_command
+            }else{
                 cout<<"there might be some typo in your command"<<endl;
             }
             if(!parsed_command.empty())
@@ -137,7 +135,7 @@ int main(void) {
                     duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
                     cout<<"duration is "<<duration<<endl;
                 }else{
-                    cout<<"There might be some typo in your command."<<endl;
+                    cout<<"No enought arguments"<<endl;
                 }
                 
             }else if(command_1.compare(load)==0){
@@ -160,6 +158,8 @@ int main(void) {
                     string sec_index_f = parsed_command.at(1);
                     class writer writer2("xt",page_size);//page_size is 1000
                     dbs.merge(g_index_file,sec_index_f, &writer2);
+                    writer2.write_from_index1(g_index_file);
+                    dbs.load("final_index.txt");
                     duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
                     cout<<"duration is "<<duration<<endl;
                 }
@@ -200,7 +200,7 @@ int main(void) {
                     keyword = keyword.substr(0,15);
                     char key[16];
                     std::strcpy(key,keyword.c_str());
-                    int counter = dbs.count(key, &writer2);
+                    int counter = dbs.count(g_index_file,key, &writer2);
                     cout<<"the number of occurrence: "<<counter<<endl;
                     duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
                     cout<<"duration is "<<duration<<endl;
@@ -214,7 +214,7 @@ int main(void) {
                         keyword=keyword.substr(0,15);
                         char key[16];
                         std::strcpy(key,keyword.c_str());
-                        dbs.search(key, &writer2);
+                        dbs.search(g_index_file,key, &writer2);
                     }
                     duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
                     cout<<"duration is "<<duration<<endl;//damn search multiple here!! for loop
@@ -238,7 +238,7 @@ int main(void) {
                     int i = stoi(num);
                     cout<<"looking at content at the specified page..."<<endl;
                     class writer writer2("xt",page_size);//page_size is 8096 by default
-                    dbs.page(i, &writer2);
+                    dbs.page(g_index_file,i, &writer2);
                     duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
                     cout<<"duration is "<<duration<<endl;
                 }else{
