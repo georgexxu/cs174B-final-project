@@ -63,7 +63,7 @@ int main(void) {
     cout<<"Please set the number of pages for the buffer! Input an integer. "<<endl;
     while(std::getline(cin,command)){
         //timer start
-        cout<<"Now, please type in your command!"<<endl;
+        cout<<"Now, please type in your command! Always build before load!"<<endl;
         std::clock_t start;
         double duration;
         start = std::clock();

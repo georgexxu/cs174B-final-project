@@ -305,7 +305,8 @@ public:
         if (tree.search(key, &value) != 0)
             printf("Key %s not found\n", key);
         else{
-            printf("%d\n", value);
+            cout<<key<<": "<<endl;
+            //printf("%d\n", value);
             int page_num = value-1;
             fstream myfile;
             //string current_file="origin_index.txt";
@@ -326,7 +327,7 @@ public:
                     }
                     if(it==(string_str_pairs1.end()-1)){
                         if(it->first!=keyword){
-                            cout<<"finished searching"<<endl;
+                            cout<<"   Finished searching"<<endl;
                             return;
                         }
                     }
@@ -346,7 +347,7 @@ public:
             return counter;
         }
         else{
-            printf("%d\n", value);
+           // printf("%d\n", value);
             int page_num = value-1;
             fstream myfile;
             //string current_file="origin_index.txt";
@@ -363,13 +364,13 @@ public:
                 for(std::vector<std::pair <string, string> >::iterator it = string_str_pairs1.begin(); it != string_str_pairs1.end(); ++it ){
                     //cout<<it->first<<" ";
                     if(it->first==keyword){
-                        cout<<it->second<<" ";
+                       // cout<<it->second<<" ";
                         counter++;
-                        cout<<"count: "<<counter<<endl;
+                       // cout<<"count: "<<counter<<endl;
                     }
                     if(it==(string_str_pairs1.end()-1)){
                         if(it->first!=keyword){
-                            cout<<"finished counting"<<endl;
+                           // cout<<"finished counting"<<endl;
                             return counter;
                         }
                     }
@@ -420,9 +421,10 @@ public:
                                         &start, key2, values, 512, &next);
             if (ret < 0)
                 break;
-            //            for (int i = 0; i < ret; i++)
-            //                printf("%d\n", values[i]);
-        }//todo
+
+        }
+        cout<<endl;
+        //todo
         //cout all the keyword inbetween,later
     }
     

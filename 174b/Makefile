@@ -1,15 +1,15 @@
-CXXFLAGS =	-O2 -g -Wall -fmessage-length=0
 
-OBJS =		174b.o
+all: main.exe
 
-LIBS =
+main.exe: main.o bpt.o
+	g++ -o main.exe main.o bpt.o
 
-TARGET =	174b
+main.o: main.cpp
+	g++ -c main.cpp
 
-$(TARGET):	$(OBJS)
-	$(CXX) -o $(TARGET) $(OBJS) $(LIBS)
-
-all:	$(TARGET)
+bpt.o: bpt.cc bpt.h
+	g++ -c bpt.cc
 
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -rf *.o
+	rm -rf *.exe

@@ -143,20 +143,7 @@ public:
     }
     
     
-//    void write_to_pos(std::vector<std::pair <string, string> > string_pairs,ostream os,long pos){
-//        for( std::vector<std::pair <string, string> >::iterator it =string_pairs.begin(); it != string_pairs.end(); ++it ){
-//            //            long position = outputfile.tellp();
-//            //              cout<<"position before write"<<position<<endl;
-//            //            if (position % page_size > page_size - 100){
-//            //outputfile<<"\n";
-//            //                cout<<"new page"<<endl;
-//            //                outputfile.seekp((position/page_size+1)*page_size-1);
-//            //                outputfile<<"\n";
-//            //            }
-//            outputfile<< it->second <<" "<<it->first <<" ";
-//        }
-//        
-//    }
+
 };
 
 #endif /* writer_hpp */
