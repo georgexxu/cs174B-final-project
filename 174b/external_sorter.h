@@ -191,7 +191,7 @@ public:
     
     void parse_line(std::vector<std::pair <string, string> > &string_str_pairs1,string line1){
         if(line1=="" or std::isspace(line1.at(0))) {
-            cout<<"parse_line: returned in advance!"<<endl;
+	  // cout<<"parse_line: returned in advance!"<<endl;
          return;
         }
         char delim = ' ';
@@ -309,11 +309,11 @@ public:
             //keep moving pairs from input buffers to output
             //if output full, then write it to disk and clear it
             //continue until all input buffer empty
-            cout<<"after empty here "<<endl;
+	    // cout<<"after empty here "<<endl;
             int num_pairs_holding = 12 * k_way * page_size/20;
             int chunk_size =k_way*page_size;
             //int a;
-            cout<<"chunk size: "<<chunk_size<<endl;
+	    // cout<<"chunk size: "<<chunk_size<<endl;
             while(not_all_empty(input_buffer, k_way)){//becasue this is first pass
                 //cout<<"never here?"<<endl;
                 //cout<<"vector_processer:"<<endl;
@@ -353,7 +353,7 @@ public:
         is.open(filename);
         string f_name1 = "temp1.txt";
         //string f_name2 = "temp_name2.txt";
-        os.open(f_name1);//pass1写出文件名
+        os.open(f_name1);//pass1写出名
         int num_chunks = get_num_chunks(filename);
         std::vector<std::pair <string, string> > input_buffer[k_way];//k_way chunks
         std::vector<std::pair <string, string> > output_buffer;//10 chunks
@@ -465,16 +465,16 @@ public:
                     bounds[i] = num_chunks_per_unit-1;// off by one
             }
             int loop = ceil(static_cast<double>(n_units)/(k_way+0.0));//check
-            cout<<"check n_units :"<<n_units<<endl;
-            cout<<"loop number check: "<<loop<<endl; // correct
-            cout<<"num_units check: "<<n_units<<endl;
-            cout<<"last chunk size check: "<<last<<endl;
-            cout<<"check bound array: "<<endl;
-            cout<<"check chunk size: "<<chunk_size<<endl;
+	    // cout<<"check n_units :"<<n_units<<endl;
+	    // cout<<"loop number check: "<<loop<<endl; // correct
+	    // cout<<"num_units check: "<<n_units<<endl;
+	    // cout<<"last chunk size check: "<<last<<endl;
+	    // cout<<"check bound array: "<<endl;
+	    //  cout<<"check chunk size: "<<chunk_size<<endl;
             for(int i = 0;i<n_units;i++){
                 cout<<bounds[i]<<" ";// off by one
             }
-            cout<<endl;
+            //cout<<endl;
             for(int k = 0; k<loop; k++){
                 initialize_int_array(counters, k_way);
                 int counter_limit;
@@ -493,15 +493,15 @@ public:
                         is.seekg(pos);
                         string line;
                         getline(is,line);
-                        if(!line.empty())
-                            cout<<line.substr(0,15)<<endl;//correct
+			// if(!line.empty())
+			// cout<<line.substr(0,15)<<endl;//correct
                         parse_line(input_buffer[i],line);
                         counters[i]=counters[i]+1;
                     }
                 }//end 1st load
                 //cout<<"check after first loading "<<endl;
                 for(int i = 0;i<counter_limit;i++){
-                    cout<<counters[i]<<" ";// off by one
+		  //cout<<counters[i]<<" ";// off by one
                 }
                 //cout<<endl;
                 //cout<<"start looping outputting! "<<endl;
