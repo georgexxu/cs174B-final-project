@@ -299,7 +299,7 @@ public:
         //load("final_index.txt",p_writer);//should clear before loading
     }
     
-    void search(char * key,writer *p_writer){//use the tree search
+    void search(string filename,char * key,writer *p_writer){//use the tree search
         bpt::value_t value;
         string keyword(key);
         if (tree.search(key, &value) != 0)
@@ -308,13 +308,14 @@ public:
             printf("%d\n", value);
             int page_num = value-1;
             fstream myfile;
-            string current_file="origin_index.txt";
-            myfile.open(current_file);
+            //string current_file="origin_index.txt";
+            myfile.open(filename);
             myfile.seekp(page_num*p_writer->page_size);
             long pos = myfile.tellp();
             //cout<<"current pos: "<<pos<<endl;
-            std::vector<std::pair <string, string> >string_str_pairs1;
+            //std::vector<std::pair <string, string> >string_str_pairs1;
             while(myfile){
+                std::vector<std::pair <string, string> >string_str_pairs1;
                 string line = "";
                 std::getline(myfile,line);
                 parse_line(string_str_pairs1, line);
@@ -336,7 +337,7 @@ public:
         //****also from this number search all the docnames and cout them
     };
     
-    int count(char * key,writer *p_writer){//use the tree search
+    int count(string filename, char * key,writer *p_writer){//use the tree search
         bpt::value_t value;
         string keyword(key);
         int counter = 0;
@@ -348,13 +349,14 @@ public:
             printf("%d\n", value);
             int page_num = value-1;
             fstream myfile;
-            string current_file="origin_index.txt";
-            myfile.open(current_file);
+            //string current_file="origin_index.txt";
+            myfile.open(filename);
             myfile.seekp(page_num*p_writer->page_size);
             long pos = myfile.tellp();
             //cout<<"current pos: "<<pos<<endl;
-            std::vector<std::pair <string, string> >string_str_pairs1;
+            //std::vector<std::pair <string, string> >string_str_pairs1;
             while(myfile){
+                std::vector<std::pair <string, string> >string_str_pairs1;
                 string line = "";
                 std::getline(myfile,line);
                 parse_line(string_str_pairs1, line);
@@ -387,12 +389,12 @@ public:
         }
         cout<<"The keyword can be found in page "<<value<<endl;
     }
-    void page(int i,writer * p_writer){//display things in page i
+    void page(string filename, int i,writer * p_writer){//display things in page i
         if(i>0){
             string line;
             int page_num = i-1;
             fstream myfile;
-            string current_file="origin_index.txt";
+            string current_file=filename;
             myfile.open(current_file);
             myfile.seekp(page_num*p_writer->page_size);
             long pos = myfile.tellp();

@@ -29,6 +29,9 @@
 /* Begin PBXFileReference section */
 		3B1FC786205BA796005C0168 /* test2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test2.cpp; sourceTree = "<group>"; };
 		3B1FC78D205C8922005C0168 /* text.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = text.txt; sourceTree = "<group>"; };
+		3B1FC78E205C93B7005C0168 /* origin.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = origin.txt; sourceTree = "<group>"; };
+		3B1FC78F205C9760005C0168 /* text2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = text2.txt; sourceTree = "<group>"; };
+		3B1FC790205C979C005C0168 /* origin2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = origin2.txt; sourceTree = "<group>"; };
 		3B36B9EC205B7CA10049CD06 /* 174b */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = 174b; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B36B9F6205B7CBB0049CD06 /* bpt.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bpt.cc; sourceTree = "<group>"; };
 		3B36B9F8205B7CE80049CD06 /* bpt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bpt.h; sourceTree = "<group>"; };
@@ -84,9 +87,12 @@
 				3B36B9FD205B7CE80049CD06 /* external_sorter.h */,
 				3B1FC786205BA796005C0168 /* test2.cpp */,
 				3B36B9FF205B7CE80049CD06 /* index_reader.h */,
+				3B1FC790205C979C005C0168 /* origin2.txt */,
 				3B36BA00205B7CE80049CD06 /* log.h */,
+				3B1FC78E205C93B7005C0168 /* origin.txt */,
 				3B1FC78D205C8922005C0168 /* text.txt */,
 				3B36BA03205B7CE80049CD06 /* main.cpp */,
+				3B1FC78F205C9760005C0168 /* text2.txt */,
 				3B36BA05205B7CE80049CD06 /* Makefile */,
 				3B36BA07205B7CE80049CD06 /* origin_reader.h */,
 				3B36BA09205B7CE80049CD06 /* predefined.h */,

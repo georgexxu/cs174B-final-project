@@ -12,6 +12,8 @@
 #include<iostream>
 #include<fstream>
 #include<string>
+#include<cstring>
+#include<ctime>
 #include <stdio.h>
 #include<algorithm>
 #include "writer.h"
