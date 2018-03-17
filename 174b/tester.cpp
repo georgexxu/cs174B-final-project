@@ -9,7 +9,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include<string>
+#include<cstring>
 #include<iostream>
+#include<ctime>
 //#include"console.h"
 //#include "origin_reader.h"
 //#include "command_checker.h"
