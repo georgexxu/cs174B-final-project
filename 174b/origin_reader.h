@@ -51,9 +51,9 @@ public:
         int line_counter = 0;
         while(myfile){
             line_counter++;
-            if(line_counter>100000){
-                return;
-            }
+//            if(line_counter>100000){
+//                return;
+//            }
             //cout<<"inside origin reader, reading my file"<<endl;
             string doc_name = "";
             string line = "";

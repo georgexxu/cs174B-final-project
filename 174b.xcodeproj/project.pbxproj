@@ -29,15 +29,15 @@
 /* Begin PBXFileReference section */
 		3B1FC786205BA796005C0168 /* test2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = test2.cpp; sourceTree = "<group>"; };
 		3B1FC78D205C8922005C0168 /* text.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = text.txt; sourceTree = "<group>"; };
-		3B1FC78E205C93B7005C0168 /* origin.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = origin.txt; sourceTree = "<group>"; };
-		3B1FC78F205C9760005C0168 /* text2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = text2.txt; sourceTree = "<group>"; };
-		3B1FC790205C979C005C0168 /* origin2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = origin2.txt; sourceTree = "<group>"; };
-		3B1FC791205CA3AD005C0168 /* a */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = a; sourceTree = "<group>"; };
+		3B1FC792205CB27D005C0168 /* p0_temp1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = p0_temp1.txt; sourceTree = "<group>"; };
+		3B1FC793205CB27D005C0168 /* p0sorted.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = p0sorted.txt; sourceTree = "<group>"; };
+		3B1FC794205CB27D005C0168 /* temp1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = temp1.txt; sourceTree = "<group>"; };
+		3B1FC795205CB727005C0168 /* temp2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = temp2.txt; sourceTree = "<group>"; };
+		3B1FC796205CC5D9005C0168 /* external.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = external.txt; sourceTree = "<group>"; };
 		3B36B9EC205B7CA10049CD06 /* 174b */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = 174b; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B36B9F6205B7CBB0049CD06 /* bpt.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bpt.cc; sourceTree = "<group>"; };
 		3B36B9F8205B7CE80049CD06 /* bpt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bpt.h; sourceTree = "<group>"; };
 		3B36B9FA205B7CE80049CD06 /* command_checker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = command_checker.h; sourceTree = "<group>"; };
-		3B36B9FB205B7CE80049CD06 /* console.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = console.h; sourceTree = "<group>"; };
 		3B36B9FC205B7CE80049CD06 /* database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = database.h; sourceTree = "<group>"; };
 		3B36B9FD205B7CE80049CD06 /* external_sorter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = external_sorter.h; sourceTree = "<group>"; };
 		3B36B9FF205B7CE80049CD06 /* index_reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = index_reader.h; sourceTree = "<group>"; };
@@ -83,18 +83,18 @@
 			children = (
 				3B36B9F8205B7CE80049CD06 /* bpt.h */,
 				3B36B9FA205B7CE80049CD06 /* command_checker.h */,
-				3B36B9FB205B7CE80049CD06 /* console.h */,
 				3B36B9FC205B7CE80049CD06 /* database.h */,
 				3B36B9FD205B7CE80049CD06 /* external_sorter.h */,
 				3B1FC786205BA796005C0168 /* test2.cpp */,
-				3B1FC791205CA3AD005C0168 /* a */,
 				3B36B9FF205B7CE80049CD06 /* index_reader.h */,
-				3B1FC790205C979C005C0168 /* origin2.txt */,
 				3B36BA00205B7CE80049CD06 /* log.h */,
-				3B1FC78E205C93B7005C0168 /* origin.txt */,
+				3B1FC792205CB27D005C0168 /* p0_temp1.txt */,
+				3B1FC793205CB27D005C0168 /* p0sorted.txt */,
+				3B1FC796205CC5D9005C0168 /* external.txt */,
+				3B1FC794205CB27D005C0168 /* temp1.txt */,
 				3B1FC78D205C8922005C0168 /* text.txt */,
 				3B36BA03205B7CE80049CD06 /* main.cpp */,
-				3B1FC78F205C9760005C0168 /* text2.txt */,
+				3B1FC795205CB727005C0168 /* temp2.txt */,
 				3B36BA05205B7CE80049CD06 /* Makefile */,
 				3B36BA07205B7CE80049CD06 /* origin_reader.h */,
 				3B36BA09205B7CE80049CD06 /* predefined.h */,

@@ -18,6 +18,7 @@
 #include<vector>
 #include "sorter.h"
 #include "predefined.h"
+#include "external_sorter.h";
 using namespace std;
 
 int main(void) {
@@ -40,7 +41,7 @@ int main(void) {
     std::string range("range");
     std::string search_test("search_test");
     std::string rollback("rollback");
-    
+    std::string external("external_sort");
     command_checker command_check;
     database dbs;
     logg log("log.txt");
@@ -271,6 +272,17 @@ int main(void) {
                     cout<<"invalid page number"<<endl;
                 }
                 
+            }else if(command_1.compare(external)){
+                cout<<"start external sorting..."<<endl;
+                //int page_num = 200;
+                string filename = "external.txt";
+                external_sorter ext(200,2000);//page_num, page_size
+                writer wt("txt",1000);
+                ext.pass_0_sort(filename,&wt);
+                ext.merge_sorting("p0sorted.txt");
+                duration = (std::clock()-start)/(double)CLOCKS_PER_SEC;
+                remove("temp2.txt");
+                cout<<"duration is "<<duration<<endl;
             }
             
         }

@@ -88,9 +88,9 @@ public:
         int line_counter = 0;
         while(myfile){
             line_counter++;
-            if(line_counter>4000){
-                return;
-            }
+//            if(line_counter>4000000){
+//                return;
+//            }
             //cout<<"inside origin reader, reading my file"<<endl;
             string doc_name = "";
             string line = "";
@@ -126,9 +126,7 @@ public:
         }
         myfile.close();
         p_writer->write_without_blocks(string_pairs,"p0_temp1.txt");
-        cout<<"finish loading vectors"<<endl;
-
-        
+        //cout<<"finish loading vectors"<<endl;
     }
     void pass_0_sort(string filename,writer * p_writer){//output
         fstream myfile;
@@ -143,8 +141,8 @@ public:
         std::vector<std::pair <string, string> > string_pairs;
         int chunk_size =k_way*page_size;//
         long total_bytes = filesize("p0_temp1.txt");
-        cout<<"total bytes"<<total_bytes<<endl;
-        cout<<"chunk size"<<chunk_size<<endl;
+      //  cout<<"total bytes"<<total_bytes<<endl;
+       // cout<<"chunk size"<<chunk_size<<endl;
         ofstream os;
         os.open("p0sorted.txt");//output stream
         myfile.open("p0_temp1.txt");
@@ -170,7 +168,7 @@ public:
                 os.seekp((pos3/chunk_size+1)*chunk_size-1);
                 os<<"\n";
                 pos3 = os.tellp();
-                cout<<"  "<<pos3<<endl;
+        //        cout<<"  "<<pos3<<endl;
                 string_pairs.clear();
             }
         }
@@ -181,12 +179,12 @@ public:
             }
             string_pairs.clear();
         }
-        cout<<"filling a line smaller than a block";
+     //   cout<<"filling a line smaller than a block";
         long pos3 = os.tellp();
         os.seekp((pos3/chunk_size+1)*chunk_size-1);
         os<<"\n";
         pos3 = os.tellp();
-        cout<<"  "<<pos3<<endl;;
+       // cout<<"  "<<pos3<<endl;;
         os.close();
     }
     
@@ -268,7 +266,7 @@ public:
                 os.seekp((pos/chunk_size+1)*chunk_size-1);
                 //cout<<"filling a line"<<endl;
                 os<<"\n";
-                cout<<os.tellp();
+               // cout<<os.tellp();
             }
             //output_buffer.clear();//dump if there is anything left
             os<<it->first<<" "<<it->second <<" ";
@@ -467,6 +465,7 @@ public:
                     bounds[i] = num_chunks_per_unit-1;// off by one
             }
             int loop = ceil(static_cast<double>(n_units)/(k_way+0.0));//check
+            cout<<"check n_units :"<<n_units<<endl;
             cout<<"loop number check: "<<loop<<endl; // correct
             cout<<"num_units check: "<<n_units<<endl;
             cout<<"last chunk size check: "<<last<<endl;
