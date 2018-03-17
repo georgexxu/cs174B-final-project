@@ -1,10 +1,10 @@
 .PHONY: run
 	
-run: main.exe
-	./main.exe
+run: main
+	./main
 
-main.exe: main.o bpt.o
-	g++ -o main.exe main.o bpt.o
+main: main.o bpt.o
+	g++ -o main main.o bpt.o
 
 main.o: main.cpp
 	g++ -c main.cpp
