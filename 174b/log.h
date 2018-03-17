@@ -28,9 +28,9 @@ private:
 public:
     logg(string name){
         this->filename = name;
-        ofstream flush;
-        flush.open(filename, std::ofstream::out | std::ofstream::trunc);
-        flush.close();
+//         ofstream flush;
+//         flush.open(filename, std::ofstream::out | std::ofstream::trunc);
+//         flush.close();
     }
     
     string get_logname(){
